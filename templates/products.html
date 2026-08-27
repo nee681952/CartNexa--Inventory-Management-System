@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products - CartNexa</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="admin-products-page">
+
+<nav class="navbar products-navbar">
+
+    <div class="products-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+    </div>
+
+    <div class="products-nav-links">
+
+        <a href="/dashboard">
+            🏠 Dashboard
+        </a>
+
+        <a href="/products">
+            🛍️ Products
+        </a>
+
+        <a href="/sales">
+            💰 Sales
+        </a>
+
+        <a href="/purchases">
+            🛒 Purchases
+        </a>
+
+        <a href="/suppliers">
+            🚚 Suppliers
+        </a>
+
+        <a href="/reports">
+            📊 Reports
+        </a>
+
+        <a href="/admin/orders">
+            📦 Orders
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <div class="admin-products-header">
+
+        <div class="admin-products-header-content">
+
+            <span class="admin-products-label">
+                CARTNEXA INVENTORY
+            </span>
+
+            <h1>
+                Products 📦
+            </h1>
+
+            <p>
+               Manage your products, stock and inventory.
+            </p>
+
+        </div>
+
+        <a
+            href="/add-product"
+            class="admin-add-product-btn"
+        >
+            <span> + </span>
+            Add Product
+        </a>
+
+    </div>
+
+    <form action="/search" method="GET" class="admin-product-search">
+
+        <div class="admin-search-input">
+            <span> 🔍 </span> 
+            
+            <input 
+                name="name" 
+                placeholder="Search product..."
+                autocomplete="off"
+            >
+        </div>
+
+        <button type="submit" class="admin-search-btn">
+            Search
+            <span> → </span>
+        </button>
+    </form>
+
+    <table class="admin-products-table">
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>📦 Product</th>
+                <th>🏷️ Category</th>
+                <th>🚚 Supplier</th>
+                <th>💰 Price</th>
+                <th>📊 Stock</th>
+                <th>⚡ Status</th>
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for product in products %}
+
+            <tr>
+
+            
+                <td>
+                    <span class="product-id-badge">
+                        #{{ product[0] }}
+                    </span>
+                </td>
+
+                <td>
+                    <strong>
+                        {{ product[1] }}
+                    </strong>
+                </td>
+
+                <td>
+                    {{ product[2] }}
+                </td>
+
+                <td>
+                    {{ product[3] or 'Not Assigned' }}
+                </td>
+
+                <td>
+                    <strong>
+                        ₹{{ product[4] }}
+                    </strong>
+                </td>
+
+                <td>
+                    <span class="admin-stock-number">
+                        {{ product[5] }}
+                    </span>
+                </td>
+
+                <td>
+
+                
+                    {% if product[5] == 0 %}
+
+                       <span class="admin-status out">
+                          ● Out of Stock
+                       </span>
+
+                    {% elif product[5] <= 5 %}
+
+                       <span class="admin-status low">
+                          ● Low Stock
+                       </span>
+
+                    {% else %}
+
+                       <span class="admin-status in">
+                          ● In Stock
+                       </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    <div class="admin-product-actions">
+
+                    
+                        <a
+                           href="/product/{{ product[0] }}"
+                           class="admin-action view"
+                        >
+                           View
+                        </a>
+
+                        <a
+                           href="/edit/{{ product[0] }}"
+                           class="admin-action edit"
+                        >
+                           Edit
+                        </a>
+
+                        <a
+                           href="/delete/{{ product[0] }}"
+                           class="admin-action delete admin-delete-btn"
+                           data-product-name="{{ product[1] }}"
+                        >
+                           Delete
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- ADMIN BACKGROUND GRAPHICS -->
+
+<div class="admin-floating admin-float-one">
+    📦
+</div>
+
+<div class="admin-floating admin-float-two">
+    🛒
+</div>
+
+<div class="admin-floating admin-float-three">
+    💳
+</div>
+
+<div class="admin-floating admin-float-four">
+    ✨
+</div>
+
+<!-- DELETE CONFIRMATION POPUP -->
+
+<div id="deleteModal" class="delete-modal">
+
+    <div class="delete-modal-overlay"></div>
+
+    <div class="delete-modal-box">
+
+        <!-- ANIMATED GRAPHICS -->
+
+        <div class="delete-graphics">
+
+            <span class="delete-graphic graphic-one">✨</span>
+
+            <span class="delete-graphic graphic-two">🗑️</span>
+
+            <span class="delete-graphic graphic-three">✨</span>
+
+        </div>
+
+
+        <!-- ICON -->
+
+        <div class="delete-main-icon">
+            🗑️
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <h2>
+            Delete Product?
+        </h2>
+
+        <p>
+            Are you sure you want to delete
+            <strong id="deleteProductName"></strong>?
+        </p>
+
+        <span class="delete-warning">
+            This action cannot be undone.
+        </span>
+
+
+        <!-- BUTTONS -->
+
+        <div class="delete-modal-actions">
+
+            <button
+                type="button"
+                id="deleteCancelBtn"
+                class="delete-cancel-btn"
+            >
+                Cancel
+            </button>
+
+            <a
+                href="#"
+                id="deleteConfirmBtn"
+                class="delete-confirm-btn"
+            >
+                🗑️ Delete
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   CARTNEXA DELETE CONFIRMATION
+   ========================================= */
+
+const deleteModal =
+    document.getElementById("deleteModal");
+
+const deleteProductName =
+    document.getElementById("deleteProductName");
+
+const deleteConfirmBtn =
+    document.getElementById("deleteConfirmBtn");
+
+const deleteCancelBtn =
+    document.getElementById("deleteCancelBtn");
+
+const deleteButtons =
+    document.querySelectorAll(".admin-delete-btn");
+
+
+/* OPEN POPUP */
+
+deleteButtons.forEach(function(button) {
+
+    button.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        const productName =
+            button.getAttribute("data-product-name");
+
+        const deleteUrl =
+            button.getAttribute("href");
+
+
+        deleteProductName.textContent =
+            productName;
+
+        deleteConfirmBtn.setAttribute(
+            "href",
+            deleteUrl
+        );
+
+
+        deleteModal.classList.add(
+            "delete-modal-show"
+        );
+
+    });
+
+});
+
+
+/* CANCEL */
+
+deleteCancelBtn.addEventListener(
+    "click",
+    function() {
+
+        deleteModal.classList.remove(
+            "delete-modal-show"
+        );
+
+    }
+);
+
+
+/* CLICK OUTSIDE POPUP */
+
+deleteModal.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target.classList.contains(
+                "delete-modal-overlay"
+            )
+        ) {
+
+            deleteModal.classList.remove(
+                "delete-modal-show"
+            );
+
+        }
+
+    }
+);
+
+
+/* ESC KEY */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            deleteModal.classList.contains(
+                "delete-modal-show"
+            )
+        ) {
+
+            deleteModal.classList.remove(
+                "delete-modal-show"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

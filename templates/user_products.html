@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Products - CartNexa</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body class="products-page">
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar products-navbar">
+
+    <div class="products-brand">
+        🛒 
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+    </div>
+
+    <div class="products-nav-links">
+
+        <a href="/user-dashboard">
+            🏠 Dashboard
+        </a>
+
+        <a href="/user-products">
+            🛍️ Products
+        </a>
+        
+        <a href="/wishlist">
+            ❤️ Wishlist
+        </a>
+
+        <a href="/my-orders">
+            📦 My Orders
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- PAGE -->
+
+<div class="products-container">
+
+
+    <!-- HEADER -->
+
+    <div class="products-page-header">
+
+        <div>
+
+            <p class="products-label">
+                CARTNEXA STORE
+            </p>
+
+            <h1>
+                Explore Products 🛍️
+            </h1>
+
+            <p>
+                Find products you need and shop with CartNexa.
+            </p>
+
+        </div>
+
+
+        <div class="products-header-icon">
+            🛒
+        </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="products-search">
+
+        <span>
+            🔍
+        </span>
+
+        <input
+            type="text"
+            id="productSearch"
+            placeholder="Search products..."
+        >
+
+    </div>
+
+
+    <!-- FILTER INFO -->
+
+    <div class="products-toolbar">
+
+        <div>
+
+            <strong>
+                All Products
+            </strong>
+
+            <span>
+                {{ products|length }} products
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT GRID -->
+
+    <div class="modern-product-grid"
+         id="productGrid">
+
+
+        {% for product in products %}
+
+        <div
+            class="modern-product-card"
+            data-name="{{ product[1]|lower }}"
+            data-category="{{ product[2]|lower }}"
+        >
+
+
+            <!-- PRODUCT VISUAL -->
+
+            <div class="modern-product-image">
+
+                {% if product[4] > 0 %}
+
+                    <span class="product-available">
+                        ✓ Available
+                    </span>
+
+                {% else %}
+
+                    <span class="product-unavailable">
+                        Out of Stock
+                    </span>
+
+                {% endif %}
+
+
+                <div class="product-main-icon">
+
+                    {% if product[5] %}
+
+                        <img
+                            src="{{ url_for('static', filename='product_images/' + product[5]) }}"
+                            alt="{{ product[1] }}"
+                            class="product-card-image"
+                        >
+
+                    {% else %}
+
+                        🛍️
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="floating-product-icon">
+                    ✨
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT DETAILS -->
+
+            <div class="modern-product-content">
+
+
+                <span class="modern-category">
+
+                    {{ product[2] }}
+
+                </span>
+
+
+                <h2>
+
+                    {{ product[1] }}
+
+                </h2>
+
+
+                <div class="product-stars">
+
+                    ⭐⭐⭐⭐⭐
+
+                    <span>
+                        4.5
+                    </span>
+
+                </div>
+
+
+                <div class="modern-product-price">
+
+                    ₹{{ "%.2f"|format(product[3]|float) }}
+
+                </div>
+
+
+                <div class="modern-stock">
+
+                    {% if product[4] > 0 %}
+
+                        <span class="stock-dot"></span>
+
+                        {{ product[4] }} available
+
+                    {% else %}
+
+                        <span class="stock-dot out"></span>
+
+                        Currently unavailable
+
+                    {% endif %}
+
+                </div>
+
+
+                <a
+                    href="/user-product/{{ product[0] }}"
+                    class="product-view-btn"
+                >
+
+                    {% if product[4] > 0 %}
+
+                        View Product
+                        →
+
+                    {% else %}
+
+                        View Details
+                        →
+
+                    {% endif %}
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+    <!-- NO RESULTS -->
+
+    <div
+        id="noProducts"
+        class="no-products"
+    >
+
+        🔍
+
+        <h2>
+            No products found
+        </h2>
+
+        <p>
+            Try searching with a different product name.
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<!-- BACKGROUND GRAPHICS -->
+
+<div class="products-floating products-float-one">
+    📦
+</div>
+
+<div class="products-floating products-float-two">
+    🛒
+</div>
+
+<div class="products-floating products-float-three">
+    💳
+</div>
+
+
+<script>
+
+/* =========================================
+   PRODUCT SEARCH
+   ========================================= */
+
+const searchInput =
+    document.getElementById("productSearch");
+
+const productCards =
+    document.querySelectorAll(
+        ".modern-product-card"
+    );
+
+const noProducts =
+    document.getElementById("noProducts");
+
+
+searchInput.addEventListener(
+    "input",
+    function () {
+
+        const search =
+            this.value
+                .toLowerCase()
+                .trim();
+
+        let visibleProducts = 0;
+
+
+        productCards.forEach(
+            function (card) {
+
+                const name =
+                    card.dataset.name;
+
+                const category =
+                    card.dataset.category;
+
+
+                if (
+                    name.includes(search) ||
+                    category.includes(search)
+                ) {
+
+                    card.style.display =
+                        "block";
+
+                    visibleProducts++;
+
+                } else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        if (visibleProducts === 0) {
+
+            noProducts.style.display =
+                "block";
+
+        } else {
+
+            noProducts.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   CARD ENTRANCE ANIMATION
+   ========================================= */
+
+const observer =
+    new IntersectionObserver(
+        function(entries) {
+
+            entries.forEach(
+                function(entry) {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "product-card-show"
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: 0.1
+        }
+    );
+
+
+productCards.forEach(
+    function(card) {
+
+        observer.observe(card);
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Sales - Inventary</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/script.js"></script>
+  </head>
+
+  <body class="admin-sales-page">
+    <nav class="navbar products-navbar">
+      <div class="products-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+      </div>
+
+      <div class="products-nav-links">
+        <a href="/dashboard"> 🏠 Dashboard </a>
+
+        <a href="/products"> 🛍️ Products </a>
+
+        <a href="/sales"> 💰 Sales </a>
+
+        <a href="/purchases"> 🛒 Purchases </a>
+
+        <a href="/suppliers"> 🚚 Suppliers </a>
+
+        <a href="/reports"> 📊 Reports </a>
+
+        <a href="/admin/orders"> 📦 Orders </a>
+
+        <a href="/logout"> Logout </a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="admin-sales-header">
+        <div>
+          <span class="admin-sales-label"> CARTNEXA SALES </span>
+
+          <h1>Sales 💰</h1>
+
+          <p>Record and manage your product sales.</p>
+        </div>
+
+        <div class="admin-sales-header-icon">💰</div>
+      </div>
+
+      <div class="cards admin-sales-cards">
+        <!-- TOTAL SALES -->
+        <div class="card admin-sales-stat-card">
+          <div class="admin-sales-stat-icon">💰</div>
+
+          <div>
+            <h3>Total Sales</h3>
+
+            <h2>₹{{ sales_total }}</h2>
+
+            <span> Total revenue </span>
+          </div>
+        </div>
+
+        <!-- ITEMS SOLD -->
+        <div class="card admin-sales-stat-card">
+          <div class="admin-sales-stat-icon">📦</div>
+
+          <div>
+            <h3>Items Sold</h3>
+
+            <h2>{{ items_sold }}</h2>
+
+            <span> Total items sold </span>
+          </div>
+        </div>
+
+        <!-- TRANSACTIONS -->
+        <div class="card admin-sales-stat-card">
+          <div class="admin-sales-stat-icon">🧾</div>
+
+          <div>
+            <h3>Transactions</h3>
+
+            <h2>{{ sales_count }}</h2>
+
+            <span> Total transactions </span>
+          </div>
+        </div>
+      </div>
+
+      <form action="/sales" method="POST" class="admin-sales-form">
+        <label>Customer Name</label>
+        <input
+          name="customer_name"
+          placeholder="Enter customer name"
+          required
+        />
+
+        <label>Product</label>
+
+        <select
+          name="product_id"
+          id="product"
+          required
+          onchange="updatePrice()"
+        >
+          <option value="">Select Product</option>
+
+          {% for product in products %}
+          <option value="{{ product[0] }}" data-price="{{ product[2] }}">
+            {{ product[1] }} - ₹{{ product[2] }} (Stock: {{ product[3] }})
+          </option>
+          {% endfor %}
+        </select>
+
+        <label>Quantity</label>
+        <input
+          name="quantity"
+          id="quantity"
+          type="number"
+          min="1"
+          value="1"
+          oninput="calculateTotal()"
+          required
+        />
+
+        <div class="sales-price-summary">
+          <div class="sales-price-row">
+            <span> 💰 Price </span>
+
+            <strong> ₹<span id="price">0</span> </strong>
+          </div>
+
+          <div class="sales-price-row sales-total-row">
+            <span> 🧾 Total </span>
+
+            <strong> ₹<span id="total">0</span> </strong>
+          </div>
+        </div>
+
+        <button type="submit">Record Sale</button>
+      </form>
+
+      <br /><br />
+
+      <h2>Sales History</h2>
+
+      <table class="admin-sales-history-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>👤 Customer</th>
+            <th>📦 Product</th>
+            <th>🔢 Quantity</th>
+            <th>💰 Total Amount</th>
+            <th>📅 Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for sale in sales %}
+
+          <tr>
+            <td>
+              <span class="sales-id-badge"> #{{ sale[0] }} </span>
+            </td>
+
+            <td>
+              <strong> {{ sale[1] }} </strong>
+            </td>
+
+            <td>{{ sale[2] }}</td>
+
+            <td>
+              <span class="sales-quantity-badge"> {{ sale[3] }} </span>
+            </td>
+
+            <td>
+              <strong class="sales-history-amount"> ₹{{ sale[4] }} </strong>
+            </td>
+
+            <td>
+              <span class="sales-history-date"> {{ sale[5] }} </span>
+            </td>
+
+            <td>
+              <a href="/invoice/{{ sale[0] }}" class="view-invoice-btn">
+                🧾 View Invoice
+                <span>→</span>
+              </a>
+            </td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- ADMIN BACKGROUND GRAPHICS -->
+
+    <div class="admin-floating admin-float-one">📦</div>
+
+    <div class="admin-floating admin-float-two">🛒</div>
+
+    <div class="admin-floating admin-float-three">💳</div>
+
+    <div class="admin-floating admin-float-four">✨</div>
+  </body>
+</html>

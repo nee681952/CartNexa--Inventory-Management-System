@@ -1,0 +1,403 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Orders - CartNexa</title>
+
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="orders-page">
+    <!-- NAVBAR -->
+
+    <nav class="navbar orders-navbar">
+      <div class="orders-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+      </div>
+
+      <div class="orders-nav-links">
+        <a href="/user-dashboard"> 🏠 Dashboard </a>
+
+        <a href="/user-products"> 🛍️ Products </a>
+
+        <a href="/wishlist"> ❤️ Wishlist </a>
+
+        <a href="/my-orders"> 📦 My Orders </a>
+
+        <a href="/logout"> Logout </a>
+      </div>
+    </nav>
+
+    <!-- FLOATING GRAPHICS -->
+
+    <div class="orders-floating orders-float-one">📦</div>
+
+    <div class="orders-floating orders-float-two">🚚</div>
+
+    <div class="orders-floating orders-float-three">✨</div>
+
+    <div class="orders-container">
+      <!-- HEADER -->
+
+      <div class="orders-header">
+        <div>
+          <p class="orders-label">CARTNEXA SHOPPING</p>
+
+          <h1>My Orders 📦</h1>
+
+          <p>Track and manage your CartNexa purchases.</p>
+        </div>
+
+        <div class="orders-header-icon">📦</div>
+      </div>
+
+      {% if orders %}
+
+      <!-- SUMMARY CARDS -->
+
+      <div class="orders-summary">
+        <div class="order-stat-card">
+          <div class="order-stat-icon">📦</div>
+
+          <div>
+            <span> Total Orders </span>
+
+            <strong> {{ total_orders }} </strong>
+          </div>
+        </div>
+
+        <div class="order-stat-card">
+          <div class="order-stat-icon">🛍️</div>
+
+          <div>
+            <span> Items Purchased </span>
+
+            <strong> {{ total_items }} </strong>
+          </div>
+        </div>
+
+        <div class="order-stat-card">
+          <div class="order-stat-icon">💰</div>
+
+          <div>
+            <span> Total Spent </span>
+
+            <strong> ₹{{ "%.2f"|format(total_spent|float) }} </strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORDER SECTION -->
+
+      <div class="orders-section-header">
+        <div>
+          <h2>Recent Orders</h2>
+
+          <p>Your latest purchases are shown below.</p>
+        </div>
+
+        <a href="/user-products" class="shop-more-btn"> 🛍️ Shop More </a>
+      </div>
+
+      <!-- ORDER CARDS -->
+
+      <div class="orders-list">
+        {% for order in orders %}
+
+        <div class="modern-order-card">
+          <!-- ORDER HEADER -->
+
+          <div class="modern-order-header">
+            <div>
+              <span class="order-small-label"> ORDER ID </span>
+
+              <strong> #{{ order[0] }} </strong>
+            </div>
+
+            <div class="order-date">📅 {{ order[6] }}</div>
+          </div>
+
+          <!-- ORDER BODY -->
+
+          <div class="modern-order-body">
+            <!-- PRODUCT -->
+
+            <div class="order-product-visual">
+              {% if order[2] %}
+
+              <img
+                src="{{ url_for('static', filename='product_images/' + order[2]) }}"
+                alt="{{ order[1] }}"
+                class="order-product-image"
+              />
+
+              {% else %}
+
+              <div class="order-product-icon">🛍️</div>
+
+              {% endif %}
+            </div>
+
+            <div class="order-product-info">
+              <span class="order-category"> CARTNEXA PRODUCT </span>
+
+              <h3>{{ order[1] }}</h3>
+
+              <p>
+                Quantity:
+                <strong> {{ order[3] }} </strong>
+              </p>
+            </div>
+
+            <!-- PRICE -->
+
+            <div class="order-price-info">
+              <span> Price </span>
+
+              <strong> ₹{{ "%.2f"|format(order[4]|float) }} </strong>
+            </div>
+
+            <div class="order-total-info">
+              <span> Total </span>
+
+              <strong> ₹{{ "%.2f"|format(order[5]|float) }} </strong>
+            </div>
+          </div>
+
+          <!-- STATUS -->
+
+<div class="order-status-section">
+
+    <div class="order-status-title">
+
+        <strong>Order Status</strong>
+
+        {% if order[7]|string|trim|lower == "pending" %}
+
+            <span class="order-status pending">
+                ● Pending
+            </span>
+
+        {% elif order[7]|string|trim|lower == "confirmed" %}
+
+            <span class="order-status confirmed">
+                ● Confirmed
+            </span>
+
+        {% elif order[7]|string|trim|lower == "shipped" %}
+
+            <span class="order-status shipped">
+                ● Shipped
+            </span>
+
+        {% elif order[7]|string|trim|lower == "out for delivery" %}
+
+            <span class="order-status shipped">
+                🚚 Out for Delivery
+            </span>
+
+        {% elif order[7]|string|trim|lower == "delivered" %}
+
+            <span class="order-status delivered">
+                ✓ Delivered
+            </span>
+
+        {% else %}
+
+            <span class="order-status">
+                {{ order[7] }}
+            </span>
+
+        {% endif %}
+
+    </div>
+            <!-- MINI ORDER TRACKING -->
+            <div class="mini-tracking">
+
+    <!-- ORDERED -->
+    <div class="mini-step
+        {% if order[7]|string|trim|lower in ['pending', 'confirmed', 'shipped', 'out for delivery', 'delivered'] %}
+        active
+        {% endif %}
+    ">
+        <div>
+            {% if order[7]|string|trim|lower in ['pending', 'confirmed', 'shipped', 'out for delivery', 'delivered'] %}
+                ✓
+            {% else %}
+                1
+            {% endif %}
+        </div>
+        <span>Ordered</span>
+    </div>
+
+
+    <!-- LINE -->
+    <div class="mini-line
+        {% if order[7]|string|trim|lower in ['confirmed', 'shipped', 'out for delivery', 'delivered'] %}
+        active-line
+        {% endif %}
+    "></div>
+
+
+    <!-- CONFIRMED -->
+    <div class="mini-step
+        {% if order[7]|string|trim|lower in ['confirmed', 'shipped', 'out for delivery', 'delivered'] %}
+        active
+        {% endif %}
+    ">
+        <div>
+            {% if order[7]|string|trim|lower in ['confirmed', 'shipped', 'out for delivery', 'delivered'] %}
+                ✓
+            {% else %}
+                2
+            {% endif %}
+        </div>
+        <span>Confirmed</span>
+    </div>
+
+
+    <!-- LINE -->
+    <div class="mini-line
+        {% if order[7]|string|trim|lower in ['shipped', 'out for delivery', 'delivered'] %}
+        active-line
+        {% endif %}
+    "></div>
+
+
+    <!-- SHIPPED -->
+    <div class="mini-step
+        {% if order[7]|string|trim|lower in ['shipped', 'out for delivery', 'delivered'] %}
+        active
+        {% endif %}
+    ">
+        <div>
+            {% if order[7]|string|trim|lower in ['shipped', 'out for delivery', 'delivered'] %}
+                ✓
+            {% else %}
+                3
+            {% endif %}
+        </div>
+        <span>Shipped</span>
+    </div>
+
+
+    <!-- LINE -->
+    <div class="mini-line
+        {% if order[7]|string|trim|lower in ['out for delivery', 'delivered'] %}
+        active-line
+        {% endif %}
+    "></div>
+
+
+    <!-- OUT FOR DELIVERY -->
+    <div class="mini-step
+        {% if order[7]|string|trim|lower in ['out for delivery', 'delivered'] %}
+        active
+        {% endif %}
+    ">
+        <div>
+            {% if order[7]|string|trim|lower in ['out for delivery', 'delivered'] %}
+                ✓
+            {% else %}
+                4
+            {% endif %}
+        </div>
+        <span>Out for Delivery</span>
+    </div>
+
+
+    <!-- LINE -->
+    <div class="mini-line
+        {% if order[7]|string|trim|lower == 'delivered' %}
+        active-line
+        {% endif %}
+    "></div>
+
+
+    <!-- DELIVERED -->
+    <div class="mini-step
+        {% if order[7]|string|trim|lower == 'delivered' %}
+        active
+        {% endif %}
+    ">
+        <div>
+            {% if order[7]|string|trim|lower == 'delivered' %}
+                ✓
+            {% else %}
+                5
+            {% endif %}
+        </div>
+        <span>Delivered</span>
+    </div>
+
+</div>
+          <!-- ACTIONS -->
+
+          <div class="modern-order-actions">
+            <div class="order-action-buttons">
+              <a href="/order/{{ order[0] }}" class="order-view-btn">
+                👁 View Order Details
+              </a>
+
+              <a href="/user-invoice/{{ order[0] }}" class="order-invoice-btn">
+                🧾 View Invoice
+              </a>
+            </div>
+
+            <span class="order-protection"> 🔒 Secure Order </span>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      {% else %}
+
+      <!-- EMPTY ORDERS -->
+
+      <div class="empty-orders">
+        <div class="empty-orders-icon">📦</div>
+
+        <h2>No Orders Yet</h2>
+
+        <p>
+          You haven't placed any orders yet. Start shopping and your orders will
+          appear here.
+        </p>
+
+        <a href="/user-products" class="empty-orders-btn">
+          🛍️ Start Shopping
+        </a>
+      </div>
+
+      {% endif %}
+    </div>
+
+    <script>
+      /* =========================================
+   ORDER CARD ANIMATION
+   ========================================= */
+
+      const orderCards = document.querySelectorAll(
+        ".modern-order-card, .order-stat-card",
+      );
+
+      const orderObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("order-card-show");
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+        },
+      );
+
+      orderCards.forEach(function (card) {
+        orderObserver.observe(card);
+      });
+    </script>
+  </body>
+</html>

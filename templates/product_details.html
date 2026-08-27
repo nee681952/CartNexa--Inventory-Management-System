@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Product Details - CartNexa</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body class="admin-product-details-page">
+
+
+<!-- NAVBAR -->
+
+<!-- ADMIN NAVBAR -->
+
+<nav class="navbar products-navbar">
+
+    <div class="products-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+    </div>
+
+    <div class="products-nav-links">
+
+        <a href="/dashboard">
+            🏠 Dashboard
+        </a>
+
+        <a href="/products">
+            🛍️ Products
+        </a>
+
+        <a href="/sales">
+            💰 Sales
+        </a>
+
+        <a href="/purchases">
+            🛒 Purchases
+        </a>
+
+        <a href="/suppliers">
+            🚚 Suppliers
+        </a>
+
+        <a href="/reports">
+            📊 Reports
+        </a>
+
+        <a href="/admin/orders">
+            📦 Orders
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- FLOATING GRAPHICS -->
+
+<div class="details-floating details-float-one">
+    📦
+</div>
+
+<div class="details-floating details-float-two">
+    💰
+</div>
+
+<div class="details-floating details-float-three">
+    🛒
+</div>
+
+<div class="details-floating details-float-four">
+    ✨
+</div>
+
+
+<!-- MAIN -->
+
+<div class="container product-details-container">
+
+
+    <!-- HEADER -->
+
+    <div class="product-details-header">
+
+        <div>
+
+            <span class="product-details-label">
+                CARTNEXA INVENTORY
+            </span>
+
+            <h1>
+                {{ product[1] }}
+            </h1>
+
+            <p>
+                View product inventory and sales information.
+            </p>
+
+        </div>
+
+
+        <div class="product-details-hero-icon">
+            📦
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT CARD -->
+
+    <div class="product-details-card">
+
+
+        <div class="product-detail-row">
+
+            <div class="product-detail-icon">
+                🏷️
+            </div>
+
+            <div>
+
+                <h3>
+                    Category
+                </h3>
+
+                <p>
+                    {{ product[4] }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-detail-row">
+
+            <div class="product-detail-icon">
+                💰
+            </div>
+
+            <div>
+
+                <h3>
+                    Price
+                </h3>
+
+                <p class="product-price-value">
+                    ₹{{ product[2] }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-detail-row">
+
+            <div class="product-detail-icon">
+                📦
+            </div>
+
+            <div>
+
+                <h3>
+                    Current Stock
+                </h3>
+
+                <p class="product-stock-value">
+                    {{ product[3] }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-detail-row">
+
+            <div class="product-detail-icon">
+                🛍️
+            </div>
+
+            <div>
+
+                <h3>
+                    Total Quantity Sold
+                </h3>
+
+                <p>
+                    {{ total_sold }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-detail-row">
+
+            <div class="product-detail-icon">
+                📊
+            </div>
+
+            <div>
+
+                <h3>
+                    Total Sales
+                </h3>
+
+                <p class="product-sales-value">
+                    ₹{{ total_sales }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- BACK BUTTON -->
+
+    <div class="product-details-back">
+
+        <a href="/products">
+            ← Back to Products
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+/* =========================================
+   PRODUCT DETAILS ANIMATION
+   ========================================= */
+
+const detailRows =
+    document.querySelectorAll(
+        ".product-detail-row"
+    );
+
+
+detailRows.forEach(
+    function(row, index) {
+
+        row.style.animationDelay =
+            (index * 0.12) + "s";
+
+    }
+);
+
+<!-- FLOATING BACKGROUND GRAPHICS -->
+
+<div class="details-floating details-float-one">
+    📦
+</div>
+
+<div class="details-floating details-float-two">
+    💰
+</div>
+
+<div class="details-floating details-float-three">
+    🛒
+</div>
+
+<div class="details-floating details-float-four">
+    ✨
+</div>
+
+</script>
+
+
+</body>
+
+</html>

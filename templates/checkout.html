@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Checkout - CartNexa</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body class="checkout-page">
+
+
+<!-- Floating ecommerce graphics -->
+
+<div class="checkout-decoration cart-one">🛒</div>
+<div class="checkout-decoration box-one">📦</div>
+<div class="checkout-decoration card-one">💳</div>
+<div class="checkout-decoration truck-one">🚚</div>
+
+<div class="checkout-bubble checkout-bubble-1"></div>
+<div class="checkout-bubble checkout-bubble-2"></div>
+<div class="checkout-bubble checkout-bubble-3"></div>
+<div class="checkout-bubble checkout-bubble-4"></div>
+<div class="checkout-bubble checkout-bubble-5"></div>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar product-details-navbar">
+
+    <div class="checkout-brand">
+        🛒
+
+        <strong>
+            <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+        </strong>
+
+    </div>
+
+
+    <div class="details-nav-links">
+
+        <a href="/user-dashboard">
+            🏠 Dashboard
+        </a>
+
+        <a href="/user-products">
+            🛍️ Products
+        </a>
+
+        <a href="/wishlist">
+            ❤️ Wishlist
+        </a>
+
+        <a href="/my-orders">
+           📦 My Orders
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<div class="checkout-container">
+
+
+    <!-- HEADER -->
+
+    <div class="checkout-header">
+
+        <div class="checkout-icon">
+            🛒
+        </div>
+
+        <div>
+
+            <h1>
+                Checkout
+            </h1>
+
+            <p>
+                Complete your CartNexa order
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div class="checkout-progress">
+
+        <div class="progress-step active">
+
+            <span>
+                ✓
+            </span>
+
+            <p>
+                Product
+            </p>
+
+        </div>
+
+
+        <div class="progress-line active-line"></div>
+
+
+        <div class="progress-step active">
+
+            <span>
+                2
+            </span>
+
+            <p>
+                Delivery
+            </p>
+
+        </div>
+
+
+        <div class="progress-line"></div>
+
+
+        <div class="progress-step">
+
+            <span>
+                3
+            </span>
+
+            <p>
+                Payment
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <form
+        action="/place-order"
+        method="POST"
+        id="checkout-form"
+    >
+
+
+        <input
+            type="hidden"
+            name="product_id"
+            value="{{ product_id }}"
+        >
+
+
+        <input
+            type="hidden"
+            name="quantity"
+            value="{{ quantity }}"
+        >
+
+
+        <div class="checkout-layout">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="checkout-main">
+
+
+                <!-- DELIVERY -->
+
+                <div class="checkout-section modern-section">
+
+
+                    <div class="section-heading">
+
+                        <div class="section-number">
+                            1
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Delivery Address
+                            </h2>
+
+                            <p>
+                                Tell us where you want your order delivered
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="checkout-grid">
+
+
+                        <!-- FULL NAME -->
+
+                        <div class="checkout-field full-width">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    👤
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="customer_name"
+                                    placeholder="Enter your full name"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ADDRESS 1 -->
+
+                        <div class="checkout-field full-width">
+
+                            <label>
+                                Address Line 1
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    🏠
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="address1"
+                                    placeholder="House / Flat / Street"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ADDRESS 2 -->
+
+                        <div class="checkout-field full-width">
+
+                            <label>
+
+                                Address Line 2
+
+                                <small>
+                                    Optional
+                                </small>
+
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    📍
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="address2"
+                                    placeholder="Area / Locality"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- LANDMARK -->
+
+                        <div class="checkout-field">
+
+                            <label>
+                                Landmark
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    📌
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="landmark"
+                                    placeholder="Nearby landmark"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PINCODE -->
+
+                        <div class="checkout-field">
+
+                            <label>
+                                Pincode
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    📮
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="pincode"
+                                    placeholder="6-digit pincode"
+                                    maxlength="6"
+                                    pattern="[0-9]{6}"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- CITY -->
+
+                        <div class="checkout-field">
+
+                            <label>
+                                City
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    🏙️
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="city"
+                                    placeholder="Enter your city"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- STATE -->
+
+                        <div class="checkout-field">
+
+                            <label>
+                                State
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    📍
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="state"
+                                    placeholder="Enter your state"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- COUNTRY -->
+
+                        <div class="checkout-field full-width">
+
+                            <label>
+                                Country
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    🌎
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="country"
+                                    value="India"
+                                    placeholder="Enter your country"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PAYMENT -->
+
+                <div class="checkout-section modern-section">
+
+
+                    <div class="section-heading">
+
+                        <div class="section-number">
+                            2
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Payment Method
+                            </h2>
+
+                            <p>
+                                Choose your preferred payment method
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT OPTIONS -->
+
+                    <div class="payment-options">
+
+
+                        <!-- CASH ON DELIVERY -->
+
+                        <label class="payment-card">
+
+                            <input
+                                type="radio"
+                                name="payment_method"
+                                value="Cash on Delivery"
+                                required
+                            >
+
+                            <span class="payment-icon">
+                                💵
+                            </span>
+
+                            <span class="payment-content">
+
+                                <strong>
+                                    Cash on Delivery
+                                </strong>
+
+                                <small>
+                                    Pay when your order arrives
+                                </small>
+
+                            </span>
+
+                            <span class="payment-check">
+                                ✓
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- UPI -->
+
+                        <label class="payment-card">
+
+                            <input
+                                type="radio"
+                                name="payment_method"
+                                value="UPI"
+                            >
+
+                            <span class="payment-icon">
+                                📱
+                            </span>
+
+                            <span class="payment-content">
+
+                                <strong>
+                                    UPI
+                                </strong>
+
+                                <small>
+                                    Pay securely using UPI
+                                </small>
+
+                            </span>
+
+                            <span class="payment-check">
+                                ✓
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- DEBIT CARD -->
+
+                        <label class="payment-card">
+
+                            <input
+                                type="radio"
+                                name="payment_method"
+                                value="Debit Card"
+                            >
+
+                            <span class="payment-icon">
+                                💳
+                            </span>
+
+                            <span class="payment-content">
+
+                                <strong>
+                                    Debit Card
+                                </strong>
+
+                                <small>
+                                    Pay securely using debit card
+                                </small>
+
+                            </span>
+
+                            <span class="payment-check">
+                                ✓
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- CREDIT CARD -->
+
+                        <label class="payment-card">
+
+                            <input
+                                type="radio"
+                                name="payment_method"
+                                value="Credit Card"
+                            >
+
+                            <span class="payment-icon">
+                                💳
+                            </span>
+
+                            <span class="payment-content">
+
+                                <strong>
+                                    Credit Card
+                                </strong>
+
+                                <small>
+                                    Pay securely using credit card
+                                </small>
+
+                            </span>
+
+                            <span class="payment-check">
+                                ✓
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- NET BANKING -->
+
+                        <label class="payment-card">
+
+                            <input
+                                type="radio"
+                                name="payment_method"
+                                value="Net Banking"
+                            >
+
+                            <span class="payment-icon">
+                                🏦
+                            </span>
+
+                            <span class="payment-content">
+
+                                <strong>
+                                    Net Banking
+                                </strong>
+
+                                <small>
+                                    Pay through your bank
+                                </small>
+
+                            </span>
+
+                            <span class="payment-check">
+                                ✓
+                            </span>
+
+                        </label>
+
+
+                    </div>
+
+
+
+                    <!-- CARD PAYMENT DETAILS -->
+
+                    <div
+                        class="card-payment-details"
+                        id="cardPaymentDetails"
+                        style="display: none;"
+                    >
+
+
+                        <div class="card-payment-header">
+
+                            <div>
+
+                                <h3>
+                                    💳 Card Payment
+                                </h3>
+
+                                <p>
+                                    Enter your card details securely
+                                </p>
+
+                            </div>
+
+                            <span>
+                                🔒
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- CARD TYPE -->
+
+                        <div class="card-field">
+
+                            <label>
+                                Card Type
+                            </label>
+
+                            <select
+                                id="cardType"
+                                name="card_type"
+                            >
+
+                                <option value="">
+                                    Select Card Type
+                                </option>
+
+                                <option value="Debit Card">
+                                    Debit Card
+                                </option>
+
+                                <option value="Credit Card">
+                                    Credit Card
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- CARD BANK -->
+
+                        <div class="card-field">
+
+                            <label>
+                                Search / Select Bank
+                            </label>
+
+                            <input
+                                type="text"
+                                id="cardBankSearch"
+                                placeholder="🔍 Search your bank..."
+                                autocomplete="off"
+                            >
+
+                            <select
+                                id="cardBank"
+                                name="card_bank"
+                            >
+
+                                <option value="">
+                                    Select your bank
+                                </option>
+
+                                <option value="State Bank of India">
+                                    State Bank of India
+                                </option>
+
+                                <option value="HDFC Bank">
+                                    HDFC Bank
+                                </option>
+
+                                <option value="ICICI Bank">
+                                    ICICI Bank
+                                </option>
+
+                                <option value="Axis Bank">
+                                    Axis Bank
+                                </option>
+
+                                <option value="Kotak Mahindra Bank">
+                                    Kotak Mahindra Bank
+                                </option>
+
+                                <option value="Bank of Baroda">
+                                    Bank of Baroda
+                                </option>
+
+                                <option value="Punjab National Bank">
+                                    Punjab National Bank
+                                </option>
+
+                                <option value="Canara Bank">
+                                    Canara Bank
+                                </option>
+
+                                <option value="Union Bank of India">
+                                    Union Bank of India
+                                </option>
+
+                                <option value="Indian Bank">
+                                    Indian Bank
+                                </option>
+
+                                <option value="Bank of India">
+                                    Bank of India
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- CARD NUMBER -->
+
+                        <div class="card-field">
+
+                            <label>
+                                Card Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="cardNumber"
+                                name="card_number"
+                                placeholder="1234 5678 9012 3456"
+                                maxlength="19"
+                                inputmode="numeric"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+
+                        <!-- CARD HOLDER -->
+
+                        <div class="card-field">
+
+                            <label>
+                                Card Holder Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="cardHolder"
+                                name="card_holder"
+                                placeholder="Name as shown on card"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+
+                        <!-- EXPIRY + CVV -->
+
+                        <div class="card-two-column">
+
+
+                            <div class="card-field">
+
+                                <label>
+                                    Expiry Date
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="cardExpiry"
+                                    name="card_expiry"
+                                    placeholder="MM / YY"
+                                    maxlength="7"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+
+                            <div class="card-field">
+
+                                <label>
+                                    CVV
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="cardCvv"
+                                    name="card_cvv"
+                                    placeholder="•••"
+                                    maxlength="3"
+                                    inputmode="numeric"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="card-security-note">
+
+                            🔒 Your card information is used only for this demo payment.
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- UPI PAYMENT DETAILS -->
+
+                    <div
+                         class="upi-payment-details"
+                         id="upiPaymentDetails"
+                         style="display: none;"
+                    >
+
+                         <div class="upi-payment-header">
+
+                             <div>
+
+                                <h3>
+                                    📱 UPI Payment
+                                </h3>
+
+                                <p>
+                                    Enter your UPI ID to continue
+                                </p>
+
+                            </div>
+
+                            <span>
+                                🔒
+                            </span>
+
+                        </div>
+
+
+                        <div class="upi-field">
+
+                            <label>
+                                UPI ID
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    📱
+                                </span>
+
+                                <input
+                                    type="text"
+                                    id="upiId"
+                                    name="upi_id"
+                                    placeholder="example@upi"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+                            <small>
+                                Example: yourname@oksbi, mobilenumber@ybl
+                            </small>
+
+                        </div>
+
+
+                        <div
+                            class="upi-validation"
+                            id="upiValidation"
+                        ></div>
+
+
+                        <div class="upi-security-note">
+
+                            🔒 Your UPI information is used only for this demo payment.
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- NET BANKING DETAILS -->
+
+                    <div
+                        class="net-banking-details"
+                        id="netBankingDetails"
+                        style="display: none;"
+                    >
+
+
+                        <div class="net-banking-header">
+
+                            <div>
+
+                                <h3>
+                                    🏦 Net Banking
+                                </h3>
+
+                                <p>
+                                    Select your bank to continue
+                                </p>
+
+                            </div>
+
+                            <span>
+                                🔒
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- SEARCH BANK -->
+
+                        <div class="bank-search-field">
+
+                            <label>
+                                Search Your Bank
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <span>
+                                    🔍
+                                </span>
+
+                                <input
+                                    type="text"
+                                    id="netBankSearch"
+                                    placeholder="Search bank..."
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- BANK LIST -->
+
+                        <div
+                            class="bank-list"
+                            id="bankList"
+                        >
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 State Bank of India
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 HDFC Bank
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 ICICI Bank
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 Axis Bank
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 Kotak Mahindra Bank
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 Bank of Baroda
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 Punjab National Bank
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 Canara Bank
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 Union Bank of India
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 Indian Bank
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="bank-option"
+                            >
+                                🏦 Bank of India
+                            </button>
+
+
+                        </div>
+
+
+
+                        <input
+                            type="hidden"
+                            name="net_banking_bank"
+                            id="netBankingBank"
+                        >
+
+
+
+                        <div
+                            class="selected-bank"
+                            id="selectedBank"
+                            style="display: none;"
+                        >
+
+                            ✓ Selected Bank:
+
+                            <strong id="selectedBankName"></strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="checkout-sidebar">
+
+
+                <!-- ORDER SUMMARY -->
+
+                <div class="order-summary-card">
+
+
+                    <div class="summary-header">
+
+                        <div>
+
+                            <h2>
+                                Order Summary
+                            </h2>
+
+                            <p>
+                                Your CartNexa purchase
+                            </p>
+
+                        </div>
+
+                        <span class="summary-cart">
+                            🛍️
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- PRODUCT -->
+
+                    <div class="summary-product">
+
+                        <div class="product-visual">
+                            📦
+                        </div>
+
+                        <div class="product-info">
+
+                            <h3>
+                                {{ product_name }}
+                            </h3>
+
+                            <p>
+
+                                Quantity:
+
+                                <strong>
+                                    {{ quantity }}
+                                </strong>
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="summary-divider"></div>
+
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Price
+                        </span>
+
+                        <strong>
+                            ₹{{ "%.2f"|format(price|float) }}
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Quantity
+                        </span>
+
+                        <strong>
+                            {{ quantity }}
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="summary-row delivery-row">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <strong>
+                            FREE
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="summary-divider"></div>
+
+
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total Amount
+                        </span>
+
+                        <strong>
+                            ₹{{ "%.2f"|format(total_amount|float) }}
+                        </strong>
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="place-order-btn"
+                    >
+
+                        <span>
+                            🔒
+                        </span>
+
+                        Place Order
+
+                        <span>
+                            ₹{{ "%.2f"|format(total_amount|float) }}
+                        </span>
+
+                    </button>
+
+
+
+                    <div class="secure-payment">
+
+                        <span>
+                            🛡️
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Safe & Secure Checkout
+                            </strong>
+
+                            <p>
+                                Your order information is protected
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- SHOPPING BENEFITS -->
+
+                <div class="checkout-benefits">
+
+
+                    <div>
+
+                        <span>
+                            🚚
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Reliable Delivery
+                            </strong>
+
+                            <p>
+                                Your order will be carefully delivered
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <span>
+                            🔒
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Payment
+                            </strong>
+
+                            <p>
+                                Multiple trusted payment options
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <span>
+                            💬
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                CartNexa Support
+                            </strong>
+
+                            <p>
+                                We're here to help with your order
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- CONTINUE SHOPPING -->
+
+        <a
+            href="/user-products"
+            class="back-shopping"
+        >
+            ← Continue Shopping
+        </a>
+
+
+    </form>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   PAYMENT ELEMENTS
+   ========================================= */
+
+const paymentCards =
+    document.querySelectorAll(
+        ".payment-card"
+    );
+
+
+const cardPaymentDetails =
+    document.getElementById(
+        "cardPaymentDetails"
+    );
+
+
+const cardType =
+    document.getElementById(
+        "cardType"
+    );
+
+
+const cardBank =
+    document.getElementById(
+        "cardBank"
+    );
+
+
+const cardBankSearch =
+    document.getElementById(
+        "cardBankSearch"
+    );
+
+
+const cardNumber =
+    document.getElementById(
+        "cardNumber"
+    );
+
+
+const cardHolder =
+    document.getElementById(
+        "cardHolder"
+    );
+
+
+const cardExpiry =
+    document.getElementById(
+        "cardExpiry"
+    );
+
+
+const cardCvv =
+    document.getElementById(
+        "cardCvv"
+    );
+
+
+const netBankingDetails =
+    document.getElementById(
+        "netBankingDetails"
+    );
+
+const upiPaymentDetails =
+    document.getElementById(
+        "upiPaymentDetails"
+    );
+
+const upiId =
+    document.getElementById(
+        "upiId"
+    );
+
+const upiValidation =
+    document.getElementById(
+        "upiValidation"
+    );
+
+
+const netBankSearch =
+    document.getElementById(
+        "netBankSearch"
+    );
+
+
+const bankOptions =
+    document.querySelectorAll(
+        ".bank-option"
+    );
+
+
+const netBankingBank =
+    document.getElementById(
+        "netBankingBank"
+    );
+
+
+const selectedBank =
+    document.getElementById(
+        "selectedBank"
+    );
+
+
+const selectedBankName =
+    document.getElementById(
+        "selectedBankName"
+    );
+
+
+
+/* =========================================
+   PAYMENT METHOD SELECTION
+   ========================================= */
+
+paymentCards.forEach(
+    function(card) {
+
+        card.addEventListener(
+            "click",
+            function() {
+
+
+                const radio =
+                    card.querySelector(
+                        'input[name="payment_method"]'
+                    );
+
+
+                const selectedPayment =
+                    radio.value;
+
+
+
+                /* Remove selected style */
+
+                paymentCards.forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "selected"
+                        );
+
+                    }
+                );
+
+
+                card.classList.add(
+                    "selected"
+                );
+
+
+
+                /* =================================
+                   DEBIT / CREDIT CARD
+                   ================================= */
+
+                if (
+                    selectedPayment === "Debit Card" ||
+                    selectedPayment === "Credit Card"
+                ) {
+
+                    cardPaymentDetails.style.display =
+                        "block";
+
+
+                    cardType.value =
+                        selectedPayment;
+
+                }
+
+                else {
+
+                    cardPaymentDetails.style.display =
+                        "none";
+
+
+                    cardType.value =
+                        "";
+
+                }
+
+
+
+                /* =================================
+                   NET BANKING
+                   ================================= */
+
+                if (
+                    selectedPayment === "Net Banking"
+                ) {
+
+                    netBankingDetails.style.display =
+                        "block";
+
+                }
+
+                else {
+
+                    netBankingDetails.style.display =
+                        "none";
+
+                }
+
+                /* =================================
+                   UPI PAYMENT
+                   ================================= */
+
+                if (
+                    selectedPayment === "UPI"
+                ) {
+
+                    upiPaymentDetails.style.display =
+                        "block";
+
+                   upiId.required = true;
+
+                }
+                else {
+
+                    upiPaymentDetails.style.display =
+                        "none";
+
+                    upiId.required = false;
+
+                    upiId.value = "";
+
+                   upiValidation.textContent = "";
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   CARD BANK SEARCH
+   ========================================= */
+
+if (cardBankSearch) {
+
+    cardBankSearch.addEventListener(
+        "input",
+        function() {
+
+
+            const search =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const options =
+                cardBank.querySelectorAll(
+                    "option"
+                );
+
+
+            options.forEach(
+                function(option) {
+
+
+                    if (
+                        option.value === ""
+                    ) {
+
+                        option.style.display =
+                            "block";
+
+                        return;
+
+                    }
+
+
+                    if (
+                        option.textContent
+                            .toLowerCase()
+                            .includes(search)
+                    ) {
+
+                        option.style.display =
+                            "block";
+
+                    }
+
+                    else {
+
+                        option.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   CARD NUMBER FORMAT
+   ========================================= */
+
+if (cardNumber) {
+
+    cardNumber.addEventListener(
+        "input",
+        function() {
+
+
+            let value =
+                this.value
+                    .replace(/\D/g, "");
+
+
+            value =
+                value.substring(
+                    0,
+                    16
+                );
+
+
+            value =
+                value
+                    .replace(
+                        /(.{4})/g,
+                        "$1 "
+                    )
+                    .trim();
+
+
+            this.value =
+                value;
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   EXPIRY FORMAT
+   ========================================= */
+
+if (cardExpiry) {
+
+    cardExpiry.addEventListener(
+        "input",
+        function() {
+
+
+            let value =
+                this.value
+                    .replace(/\D/g, "");
+
+
+            value =
+                value.substring(
+                    0,
+                    4
+                );
+
+
+            if (
+                value.length > 2
+            ) {
+
+                value =
+                    value.substring(
+                        0,
+                        2
+                    )
+                    + " / "
+                    + value.substring(
+                        2
+                    );
+
+            }
+
+
+            this.value =
+                value;
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   CVV
+   ========================================= */
+
+if (cardCvv) {
+
+    cardCvv.addEventListener(
+        "input",
+        function() {
+
+            this.value =
+                this.value
+                    .replace(/\D/g, "")
+                    .substring(
+                        0,
+                        3
+                    );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   NET BANKING SEARCH
+   ========================================= */
+
+if (netBankSearch) {
+
+    netBankSearch.addEventListener(
+        "input",
+        function() {
+
+
+            const search =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+
+            bankOptions.forEach(
+                function(bank) {
+
+
+                    const bankName =
+                        bank.textContent
+                            .toLowerCase();
+
+
+                    if (
+                        bankName.includes(
+                            search
+                        )
+                    ) {
+
+                        bank.style.display =
+                            "block";
+
+                    }
+
+                    else {
+
+                        bank.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   SELECT NET BANKING BANK
+   ========================================= */
+
+bankOptions.forEach(
+    function(bank) {
+
+        bank.addEventListener(
+            "click",
+            function() {
+
+
+                const bankName =
+                    this.textContent
+                        .replace(
+                            "🏦",
+                            ""
+                        )
+                        .trim();
+
+
+                netBankingBank.value =
+                    bankName;
+
+
+                selectedBankName.textContent =
+                    bankName;
+
+
+                selectedBank.style.display =
+                    "block";
+
+
+                bankOptions.forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "selected-bank-option"
+                        );
+
+                    }
+                );
+
+
+                this.classList.add(
+                    "selected-bank-option"
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   PREVENT DOUBLE ORDER
+   ========================================= */
+
+const checkoutForm =
+    document.getElementById(
+        "checkout-form"
+    );
+
+
+checkoutForm.addEventListener(
+    "submit",
+    function() {
+
+
+        const button =
+            document.querySelector(
+                ".place-order-btn"
+            );
+
+
+        button.classList.add(
+            "processing"
+        );
+
+
+        button.innerHTML =
+            "⏳ Processing Order...";
+
+
+        button.disabled =
+            true;
+
+    }
+);
+
+/* =========================================
+   UPI ID VALIDATION
+   ========================================= */
+
+if (upiId) {
+
+    upiId.addEventListener(
+        "input",
+        function() {
+
+            const value =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+            if (value === "") {
+
+                upiValidation.textContent = "";
+
+                return;
+            }
+
+            const upiPattern =
+                /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$/;
+
+            if (upiPattern.test(value)) {
+
+                upiValidation.textContent =
+                    "✓ Valid UPI ID";
+
+                upiValidation.className =
+                    "upi-validation valid";
+
+            }
+            else {
+
+                upiValidation.textContent =
+                    "✗ Please enter a valid UPI ID";
+
+                upiValidation.className =
+                    "upi-validation invalid";
+
+            }
+
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Add Product - Inventary</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="admin-add-product-page">
+    <nav class="navbar products-navbar">
+      <div class="products-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+      </div>
+
+      <div class="products-nav-links">
+        <a href="/dashboard"> 🏠 Dashboard </a>
+
+        <a href="/products"> 🛍️ Products </a>
+
+        <a href="/sales"> 💰 Sales </a>
+
+        <a href="/purchases"> 🛒 Purchases </a>
+
+        <a href="/suppliers"> 🚚 Suppliers </a>
+
+        <a href="/reports"> 📊 Reports </a>
+
+        <a href="/admin/orders"> 📦 Orders </a>
+
+        <a href="/logout"> Logout </a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="admin-add-header">
+        <div>
+          <span class="admin-add-label"> CARTNEXA INVENTORY </span>
+
+          <h1>Add Product 📦</h1>
+
+          <p>Add a new product to your inventory.</p>
+        </div>
+
+        <div class="admin-add-header-icon">➕</div>
+      </div>
+
+      <form
+        action="/add"
+        method="POST"
+        enctype="multipart/form-data"
+        class="product-form"
+      >
+        <div class="form-group">
+          <label>Product Name</label>
+          <input name="name" placeholder="Enter product name" required />
+        </div>
+
+        <div class="form-group">
+          <label>Price</label>
+          <input
+            name="price"
+            type="number"
+            step="0.01"
+            placeholder="Enter price"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Quantity</label>
+          <input
+            name="quantity"
+            type="number"
+            placeholder="Enter quantity"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+
+          <select name="category" required>
+            <option value="">Select Category</option>
+
+            {% for category in categories %}
+            <option value="{{ category[1] }}">{{ category[1] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Supplier</label>
+
+          <select name="supplier_id">
+            <option value="">Select Supplier</option>
+
+            {% for supplier in suppliers %}
+            <option value="{{ supplier[0] }}">
+              {{ supplier[1] }} - {{ supplier[4] }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Product Image</label>
+
+          <input type="file" name="image" accept="image/*" />
+        </div>
+
+        <button type="submit" class="admin-submit-product-btn">
+          <span>+</span>
+          Add Product
+        </button>
+      </form>
+    </div>
+
+    <!-- ADMIN BACKGROUND GRAPHICS -->
+
+    <div class="admin-floating admin-float-one">📦</div>
+
+    <div class="admin-floating admin-float-two">🛒</div>
+
+    <div class="admin-floating admin-float-three">💳</div>
+
+    <div class="admin-floating admin-float-four">✨</div>
+  </body>
+</html>

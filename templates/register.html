@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create Account - CartNexa</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="auth-page">
+
+    <!-- Animated bubbles -->
+
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+    <div class="bubble bubble-4"></div>
+    <div class="bubble bubble-5"></div>
+    <div class="bubble bubble-6"></div>
+    <div class="bubble bubble-7"></div>
+    <div class="bubble bubble-8"></div>
+    <div class="bubble bubble-9"></div>
+    <div class="bubble bubble-10"></div>
+    <div class="bubble bubble-11"></div>
+    <div class="bubble bubble-12"></div>
+
+
+    <!-- Floating e-commerce graphics -->
+
+    <div class="auth-decoration one">🛒</div>
+    <div class="auth-decoration two">📦</div>
+    <div class="auth-decoration three">📊</div>
+    <div class="auth-decoration four">💻</div>
+
+
+    <!-- Register Card -->
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            🛒
+        </div>
+
+
+        <h1>Create Account</h1>
+
+        <div class="auth-line"></div>
+
+        <p class="auth-subtitle">
+            Join CartNexa today
+        </p>
+
+
+        <!-- Registration Form -->
+
+        <form
+            action="/register"
+            method="POST"
+            class="auth-form"
+            id="register-form"
+        >
+
+            <!-- Username -->
+
+            <label
+                for="username"
+                class="auth-label"
+            >
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                class="auth-input"
+                placeholder="Choose a username"
+                autocomplete="username"
+                required
+            >
+
+
+            <!-- Password -->
+
+            <label
+                for="password"
+                class="auth-label"
+            >
+                Password
+            </label>
+
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="auth-input"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    id="password-toggle"
+                    aria-label="Show password"
+                >
+                    👁
+                </button>
+
+            </div>
+
+
+            <!-- Password Restrictions -->
+
+            <div
+                class="password-rules"
+                id="password-rules"
+                style="display: none;"
+            >
+
+                <p id="length-rule">
+                    ✗ At least 8 characters
+                </p>
+
+                <p id="uppercase-rule">
+                    ✗ At least one uppercase letter
+                </p>
+
+                <p id="lowercase-rule">
+                    ✗ At least one lowercase letter
+                </p>
+
+                <p id="number-rule">
+                    ✗ At least one number
+                </p>
+
+                <p id="special-rule">
+                    ✗ At least one special character
+                </p>
+
+            </div>
+
+
+            <!-- Confirm Password -->
+
+            <label
+                for="confirm-password"
+                class="auth-label"
+            >
+                Confirm Password
+            </label>
+
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm_password"
+                    class="auth-input"
+                    placeholder="Confirm your password"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    id="confirm-password-toggle"
+                    aria-label="Show password"
+                >
+                    👁
+                </button>
+
+            </div>
+
+
+            <!-- Password Match Message -->
+
+            <div
+                id="password-match"
+                class="login-error"
+                style="display: none;"
+            >
+                ⚠️ Passwords do not match
+            </div>
+
+
+            <!-- Create Account -->
+
+            <button
+                type="submit"
+                class="auth-button"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+
+        <!-- Login Link -->
+
+        <p class="auth-link-text">
+
+            Already have an account?
+
+            <a
+                href="/login"
+                class="auth-link"
+            >
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+
+    <script>
+
+        /* =========================================
+           PASSWORD ELEMENTS
+           ========================================= */
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const confirmPasswordInput =
+            document.getElementById("confirm-password");
+
+        const passwordToggle =
+            document.getElementById("password-toggle");
+
+        const confirmPasswordToggle =
+            document.getElementById("confirm-password-toggle");
+
+        const rulesBox =
+            document.getElementById("password-rules");
+
+        const passwordMatch =
+            document.getElementById("password-match");
+
+        const form =
+            document.getElementById("register-form");
+
+
+        /* =========================================
+           SHOW / HIDE PASSWORD
+           ========================================= */
+
+        passwordToggle.addEventListener(
+            "click",
+            function () {
+
+                if (passwordInput.type === "password") {
+
+                    passwordInput.type = "text";
+
+                    passwordToggle.textContent = "🙈";
+
+                } else {
+
+                    passwordInput.type = "password";
+
+                    passwordToggle.textContent = "👁";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           SHOW / HIDE CONFIRM PASSWORD
+           ========================================= */
+
+        confirmPasswordToggle.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    confirmPasswordInput.type === "password"
+                ) {
+
+                    confirmPasswordInput.type = "text";
+
+                    confirmPasswordToggle.textContent = "🙈";
+
+                } else {
+
+                    confirmPasswordInput.type = "password";
+
+                    confirmPasswordToggle.textContent = "👁";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           PASSWORD VALIDATION
+           ========================================= */
+
+        function checkPassword() {
+
+            const value =
+                passwordInput.value;
+
+            const lengthValid =
+                value.length >= 8;
+
+            const uppercaseValid =
+                /[A-Z]/.test(value);
+
+            const lowercaseValid =
+                /[a-z]/.test(value);
+
+            const numberValid =
+                /[0-9]/.test(value);
+
+            const specialValid =
+                /[^A-Za-z0-9]/.test(value);
+
+
+            updateRule(
+                "length-rule",
+                lengthValid
+            );
+
+            updateRule(
+                "uppercase-rule",
+                uppercaseValid
+            );
+
+            updateRule(
+                "lowercase-rule",
+                lowercaseValid
+            );
+
+            updateRule(
+                "number-rule",
+                numberValid
+            );
+
+            updateRule(
+                "special-rule",
+                specialValid
+            );
+
+
+            return (
+                lengthValid &&
+                uppercaseValid &&
+                lowercaseValid &&
+                numberValid &&
+                specialValid
+            );
+
+        }
+
+
+        /* =========================================
+           UPDATE RULE
+           ========================================= */
+
+        function updateRule(id, valid) {
+
+            const rule =
+                document.getElementById(id);
+
+            if (valid) {
+
+                rule.classList.add("valid");
+
+                rule.textContent =
+                    rule.textContent
+                        .replace("✗", "✓");
+
+            } else {
+
+                rule.classList.remove("valid");
+
+                rule.textContent =
+                    rule.textContent
+                        .replace("✓", "✗");
+
+            }
+
+        }
+
+
+        /* =========================================
+           PASSWORD INPUT
+           ========================================= */
+
+        passwordInput.addEventListener(
+            "input",
+            function () {
+
+                /*
+                 * Keep restrictions hidden
+                 * while the user is typing.
+                 */
+
+                rulesBox.classList.remove("show");
+
+                passwordMatch.style.display =
+                    "none";
+
+            }
+        );
+
+
+        /* =========================================
+           CONFIRM PASSWORD INPUT
+           ========================================= */
+
+        confirmPasswordInput.addEventListener(
+            "input",
+            function () {
+
+                passwordMatch.style.display =
+                    "none";
+
+            }
+        );
+
+
+        /* =========================================
+           FORM SUBMISSION
+           ========================================= */
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+                const passwordValid =
+                    checkPassword();
+
+                const passwordsMatch =
+                    passwordInput.value ===
+                    confirmPasswordInput.value;
+
+
+                /* Invalid password */
+
+                if (!passwordValid) {
+
+                    event.preventDefault();
+
+                    rulesBox.classList.add("show");
+
+                    passwordInput.focus();
+
+                    return;
+
+                }
+
+
+                /* Passwords don't match */
+
+                if (!passwordsMatch) {
+
+                    event.preventDefault();
+
+                    passwordMatch.style.display =
+                        "block";
+
+                    confirmPasswordInput.focus();
+
+                    return;
+
+                }
+
+                /*
+                 * Everything is valid.
+                 * Allow Flask to receive the form.
+                 */
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

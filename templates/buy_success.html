@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Order Confirmed - CartNexa</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body class="success-page">
+
+
+<!-- Animated Background -->
+
+<div class="success-bg-circle circle-one"></div>
+<div class="success-bg-circle circle-two"></div>
+<div class="success-bg-circle circle-three"></div>
+
+
+<!-- Floating Graphics -->
+
+<div class="success-floating floating-one">
+    📦
+</div>
+
+<div class="success-floating floating-two">
+    🛒
+</div>
+
+<div class="success-floating floating-three">
+    🚚
+</div>
+
+<div class="success-floating floating-four">
+    ✨
+</div>
+
+
+<!-- MAIN -->
+
+<div class="success-container">
+
+
+    <!-- SUCCESS CARD -->
+
+    <div class="success-card">
+
+
+        <!-- Animated Check -->
+
+        <div class="success-check-wrapper">
+
+            <div class="success-icon">
+
+                ✓
+
+            </div>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <div class="success-title-area">
+
+            <p class="success-label">
+                ORDER CONFIRMED
+            </p>
+
+            <h1>
+                Order Placed Successfully!
+            </h1>
+
+            <p class="success-message">
+                Thank you for shopping with
+                <strong>CartNexa</strong>.
+                Your order has been confirmed.
+            </p>
+
+        </div>
+
+
+        <!-- ORDER ID -->
+
+        <div class="success-order-id">
+
+            <span>
+                ORDER ID
+            </span>
+
+            <strong>
+                #{{ order_id }}
+            </strong>
+
+        </div>
+
+
+        <!-- ORDER PROGRESS -->
+
+        <div class="order-progress">
+
+
+            <div class="progress-step completed">
+
+                <div class="progress-circle">
+                    ✓
+                </div>
+
+                <span>
+                    Ordered
+                </span>
+
+            </div>
+
+
+            <div class="progress-line completed-line"></div>
+
+
+            <div class="progress-step">
+
+                <div class="progress-circle">
+                    2
+                </div>
+
+                <span>
+                    Confirmed
+                </span>
+
+            </div>
+
+
+            <div class="progress-line"></div>
+
+
+            <div class="progress-step">
+
+                <div class="progress-circle">
+                    3
+                </div>
+
+                <span>
+                    Shipped
+                </span>
+
+            </div>
+
+
+            <div class="progress-line"></div>
+
+
+            <div class="progress-step">
+
+                <div class="progress-circle">
+                    4
+                </div>
+
+                <span>
+                    Delivered
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ORDER DETAILS -->
+
+        <div class="success-details">
+
+
+            <div class="success-detail-item">
+
+                <span>
+                    🛍️ Product
+                </span>
+
+                <strong>
+                    {{ product_name }}
+                </strong>
+
+            </div>
+
+
+            <div class="success-detail-item">
+
+                <span>
+                    🔢 Quantity
+                </span>
+
+                <strong>
+                    {{ quantity }}
+                </strong>
+
+            </div>
+
+
+            <div class="success-detail-item">
+
+                <span>
+                    💳 Payment
+                </span>
+
+                <strong>
+                    {{ payment_method }}
+                </strong>
+
+            </div>
+
+
+            <div class="success-detail-item total-item">
+
+                <span>
+                    💰 Total Amount
+                </span>
+
+                <strong>
+                    ₹{{ "%.2f"|format(total_amount|float) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- DELIVERY -->
+
+        <div class="delivery-box">
+
+
+            <div class="delivery-header">
+
+                <div class="delivery-icon">
+                    🚚
+                </div>
+
+                <div>
+
+                    <h3>
+                        Delivery Address
+                    </h3>
+
+                    <p>
+                        Your order will be delivered here
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="delivery-address">
+
+
+                <strong>
+                    {{ customer_name }}
+                </strong>
+
+
+                <p>
+                    {{ address1 }}
+                </p>
+
+
+                {% if address2 %}
+
+                <p>
+                    {{ address2 }}
+                </p>
+
+                {% endif %}
+
+
+                {% if landmark %}
+
+                <p>
+                    📍 {{ landmark }}
+                </p>
+
+                {% endif %}
+
+
+                <p>
+                    📮 Pincode: {{ pincode }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="success-info">
+
+
+            <div>
+
+                <span>
+                    🔒
+                </span>
+
+                <p>
+                    Secure Order
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    📦
+                </span>
+
+                <p>
+                    Easy Tracking
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    🚚
+                </span>
+
+                <p>
+                    Reliable Delivery
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="success-actions">
+
+
+            <a
+                href="/my-orders"
+                class="success-btn primary"
+            >
+
+                📦 View My Orders
+
+            </a>
+
+
+            <a
+                href="/user-products"
+                class="success-btn secondary"
+            >
+
+                🛍️ Continue Shopping
+
+            </a>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <p class="success-footer">
+
+            Thank you for choosing
+            <strong>CartNexa</strong> ❤️
+
+        </p>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   SUCCESS ANIMATION
+   ========================================= */
+
+window.addEventListener(
+    "load",
+    function () {
+
+        document
+            .querySelector(".success-card")
+            .classList.add("success-card-show");
+
+    }
+);
+
+
+/* =========================================
+   CONFETTI-LIKE PARTICLES
+   ========================================= */
+
+const symbols = [
+    "✦",
+    "•",
+    "✨",
+    "✧"
+];
+
+
+for (
+    let i = 0;
+    i < 18;
+    i++
+) {
+
+    const particle =
+        document.createElement("div");
+
+
+    particle.className =
+        "success-particle";
+
+
+    particle.textContent =
+        symbols[
+            Math.floor(
+                Math.random() *
+                symbols.length
+            )
+        ];
+
+
+    particle.style.left =
+        Math.random() * 100 + "%";
+
+
+    particle.style.animationDelay =
+        Math.random() * 3 + "s";
+
+
+    particle.style.animationDuration =
+        3 + Math.random() * 4 + "s";
+
+
+    document.body.appendChild(
+        particle
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

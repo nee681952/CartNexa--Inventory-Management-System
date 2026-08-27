@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Login - CartNexa</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="auth-page">
+    <!-- Animated background bubbles -->
+
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+    <div class="bubble bubble-4"></div>
+    <div class="bubble bubble-5"></div>
+    <div class="bubble bubble-6"></div>
+    <div class="bubble bubble-7"></div>
+    <div class="bubble bubble-8"></div>
+    <div class="bubble bubble-9"></div>
+    <div class="bubble bubble-10"></div>
+    <div class="bubble bubble-11"></div>
+    <div class="bubble bubble-12"></div>
+
+    <!-- Floating e-commerce graphics -->
+
+    <div class="auth-decoration one">🛒</div>
+    <div class="auth-decoration two">📦</div>
+    <div class="auth-decoration three">📊</div>
+    <div class="auth-decoration four">💻</div>
+
+    <!-- Login Card -->
+
+    <div class="auth-card">
+      <div class="auth-logo">🛒</div>
+
+      <h1>CartNexa</h1>
+
+      <div class="auth-line"></div>
+
+      <p class="auth-subtitle">Inventory Management System</p>
+
+      <!-- LOGIN TYPE SELECTION -->
+
+      <div class="login-type-selection" id="loginTypeSelection">
+        <p class="login-type-title">Choose Login Type</p>
+
+        <button
+          type="button"
+          class="login-type-button admin-login-choice"
+          onclick="showLoginForm('admin')"
+        >
+          <span class="login-type-icon"> 👨‍💼 </span>
+
+          <span> Admin Login </span>
+
+          <span class="login-type-arrow"> → </span>
+        </button>
+
+        <button
+          type="button"
+          class="login-type-button user-login-choice"
+          onclick="showLoginForm('user')"
+        >
+          <span class="login-type-icon"> 👤 </span>
+
+          <span> User Login </span>
+
+          <span class="login-type-arrow"> → </span>
+        </button>
+      </div>
+
+      <!-- LOGIN FORM -->
+
+      <div id="loginFormContainer" class="login-form-container">
+        <div class="selected-login-type">
+          <span id="selectedLoginIcon"> 👤 </span>
+
+          <strong id="selectedLoginText"> User Login </strong>
+        </div>
+
+        {% if error %}
+
+        <div class="login-error">⚠️ {{ error }}</div>
+
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+          <!-- LOGIN TYPE -->
+
+          <input type="hidden" name="login_type" id="loginType" value="user" />
+
+          <!-- Username -->
+
+          <label class="auth-label"> Username </label>
+
+          <input
+            type="text"
+            name="username"
+            class="auth-input"
+            placeholder="Enter your username"
+            autocomplete="username"
+            required
+          />
+
+          <!-- Password -->
+
+          <label class="auth-label"> Password </label>
+
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              class="auth-input"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              id="login-password-toggle"
+              aria-label="Show password"
+            >
+              👁
+            </button>
+          </div>
+
+          <!-- Login Button -->
+
+          <button type="submit" class="auth-button" id="loginSubmitButton">
+            Login
+          </button>
+        </form>
+
+        <!-- Change Login Type -->
+
+        <button
+          type="button"
+          class="change-login-type"
+          onclick="changeLoginType()"
+        >
+          ← Change Login Type
+        </button>
+
+        <!-- Register Link -->
+
+        <p class="auth-link-text" id="registerLink">
+          Don't have an account?
+
+          <a href="/register" class="auth-link"> Create Account </a>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      /* =========================================
+           LOGIN TYPE
+           ========================================= */
+
+      const loginTypeSelection = document.getElementById("loginTypeSelection");
+
+      const loginFormContainer = document.getElementById("loginFormContainer");
+
+      const loginType = document.getElementById("loginType");
+
+      const selectedLoginIcon = document.getElementById("selectedLoginIcon");
+
+      const selectedLoginText = document.getElementById("selectedLoginText");
+
+      const loginSubmitButton = document.getElementById("loginSubmitButton");
+
+      function showLoginForm(type) {
+        loginType.value = type;
+
+        const registerLink = document.getElementById("registerLink");
+
+        if (type === "admin") {
+          selectedLoginIcon.textContent = "👨‍💼";
+
+          selectedLoginText.textContent = "Admin Login";
+
+          loginSubmitButton.textContent = "Login";
+
+          /* Hide registration for admin */
+          registerLink.style.display = "none";
+        } else {
+          selectedLoginIcon.textContent = "👤";
+
+          selectedLoginText.textContent = "User Login";
+
+          loginSubmitButton.textContent = "Login";
+
+          /* Show registration for user */
+          registerLink.style.display = "block";
+        }
+
+        loginTypeSelection.style.display = "none";
+
+        loginFormContainer.style.display = "block";
+      }
+
+      function changeLoginType() {
+        loginFormContainer.style.display = "none";
+
+        loginTypeSelection.style.display = "block";
+      }
+
+      /* =========================================
+           PASSWORD SHOW / HIDE
+           ========================================= */
+
+      const passwordInput = document.getElementById("login-password");
+
+      const passwordToggle = document.getElementById("login-password-toggle");
+
+      passwordToggle.addEventListener("click", function () {
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+
+          passwordToggle.textContent = "🙈";
+
+          passwordToggle.setAttribute("aria-label", "Hide password");
+        } else {
+          passwordInput.type = "password";
+
+          passwordToggle.textContent = "👁";
+
+          passwordToggle.setAttribute("aria-label", "Show password");
+        }
+      });
+
+      /* =========================================
+   AUTO OPEN USER LOGIN
+   ========================================= */
+
+      const urlParams = new URLSearchParams(window.location.search);
+
+      const requestedLoginType = urlParams.get("type");
+
+      if (requestedLoginType === "user") {
+        showLoginForm("user");
+      }
+    </script>
+  </body>
+</html>

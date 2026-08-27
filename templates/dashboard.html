@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dashboard - CartNex</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="admin-dashboard-page">
+    <!-- ADMIN DASHBOARD BACKGROUND GRAPHICS -->
+
+    <div class="admin-floating admin-float-one">📦</div>
+
+    <div class="admin-floating admin-float-two">💰</div>
+
+    <div class="admin-floating admin-float-three">📊</div>
+
+    <div class="admin-floating admin-float-four">🛒</div>
+
+    <nav class="navbar products-navbar">
+      <div class="products-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+      </div>
+
+      <div class="products-nav-links">
+        <a href="/dashboard"> 🏠 Dashboard </a>
+
+        <a href="/products"> 🛍️ Products </a>
+
+        <a href="/sales"> 💰 Sales </a>
+
+        <a href="/purchases"> 🛒 Purchases </a>
+
+        <a href="/suppliers"> 🚚 Suppliers </a>
+
+        <a href="/reports"> 📊 Reports </a>
+
+        <a href="/admin/orders"> 📦 Orders </a>
+
+        <a href="/logout"> Logout </a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="admin-dashboard-header">
+        <div class="admin-header-content">
+          <span class="admin-header-label"> CARTNEXA ADMIN PANEL </span>
+
+          <h1>
+            Dashboard
+            <span>👋</span>
+          </h1>
+
+          <p>Welcome back! Here's an overview of your inventory and sales.</p>
+        </div>
+
+        <div class="admin-header-icon">📊</div>
+      </div>
+
+      <div class="cards">
+        <!-- TOTAL PRODUCTS -->
+
+        <div class="card admin-stat-card products-stat">
+          <div class="admin-stat-icon">📦</div>
+
+          <div class="admin-stat-content">
+            <h3>Total Products</h3>
+
+            <h2>{{ total_products }}</h2>
+
+            <span> Products in inventory </span>
+          </div>
+        </div>
+
+        <!-- LOW STOCK -->
+
+        <div class="card admin-stat-card low-stock-stat">
+          <div class="admin-stat-icon">⚠️</div>
+
+          <div class="admin-stat-content">
+            <h3>Low Stock</h3>
+
+            <h2>{{ low_stock }}</h2>
+
+            <span> Need attention </span>
+          </div>
+        </div>
+
+        <!-- TOTAL SALES -->
+
+        <div class="card admin-stat-card sales-stat">
+          <div class="admin-stat-icon">💰</div>
+
+          <div class="admin-stat-content">
+            <h3>Total Sales</h3>
+
+            <h2>₹{{ total_sales }}</h2>
+
+            <span> Total revenue </span>
+          </div>
+        </div>
+
+        <!-- OUT OF STOCK -->
+
+        <div class="card admin-stat-card out-stock-stat">
+          <div class="admin-stat-icon">🚫</div>
+
+          <div class="admin-stat-content">
+            <h3>Out of Stock</h3>
+
+            <h2>{{ out_of_stock }}</h2>
+
+            <span> Currently unavailable </span>
+          </div>
+        </div>
+      </div>
+
+      <h2>Recent Sales</h2>
+
+      <table class="admin-sales-table">
+        <thead>
+          <tr>
+            <th>👤 Customer</th>
+            <th>📦 Product</th>
+            <th>🔢 Quantity</th>
+            <th>💰 Total</th>
+            <th>📅 Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for sale in recent_sales %}
+
+          <tr>
+            <td>
+              <strong>{{ sale[0] }}</strong>
+            </td>
+
+            <td>{{ sale[1] }}</td>
+            <td>
+              <span class="quantity-badge"> {{ sale[2] }} </span>
+            </td>
+            <td>
+              <strong class="sale-amount"> ₹{{ sale[3] }} </strong>
+            </td>
+            <td>
+              <span class="sale-date"> {{ sale[4] }} </span>
+            </td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h2>Low Stock Products</h2>
+
+      <table class="admin-low-stock-table">
+        <thead>
+          <tr>
+            <th>📦 Product</th>
+            <th>🏷️ Category</th>
+            <th>📊 Stock</th>
+            <th>⚠️ Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for product in low_stock_products %}
+
+          <tr>
+            <td>
+              <strong> {{ product[0] }} </strong>
+            </td>
+
+            <td>{{ product[1] }}</td>
+
+            <td>
+              <span class="stock-number"> {{ product[2] }} </span>
+            </td>
+
+            <td>
+              <span class="admin-low-stock-badge"> ⚠️ Low Stock </span>
+            </td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ADMIN BACKGROUND GRAPHICS -->
+
+    <div class="admin-floating admin-float-one">📦</div>
+
+    <div class="admin-floating admin-float-two">🛒</div>
+
+    <div class="admin-floating admin-float-three">💳</div>
+
+    <div class="admin-floating admin-float-four">✨</div>
+  </body>
+</html>

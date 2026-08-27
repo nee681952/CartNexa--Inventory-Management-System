@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Invoice #{{ order[0] }} - CartNexa</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+<body class="user-invoice-page">
+
+<div class="invoice-paper">
+
+    <!-- HEADER -->
+
+    <div class="invoice-top">
+
+        <div class="invoice-brand">
+
+            <div class="invoice-logo">
+                🛒
+            </div>
+
+            <div>
+                <h1>
+                    <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+                </h1>
+
+                <p>
+                    Your trusted shopping partner
+                </p>
+            </div>
+
+        </div>
+
+        <div class="invoice-title">
+
+            <h2>
+                INVOICE
+            </h2>
+
+            <p>
+                Invoice #{{ order[0] }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="invoice-divider"></div>
+
+
+    <!-- ORDER INFORMATION -->
+
+    <div class="invoice-info-section">
+
+        <div class="invoice-info-box">
+
+            <span class="invoice-label">
+                BILL TO
+            </span>
+
+            <h3>
+                {{ order[1] }}
+            </h3>
+
+            <p>
+                CartNexa Customer
+            </p>
+
+        </div>
+
+
+        <div class="invoice-info-box invoice-info-right">
+
+            <div>
+                <span class="invoice-label">
+                    INVOICE NUMBER
+                </span>
+
+                <strong>
+                    #{{ order[0] }}
+                </strong>
+            </div>
+
+            <div>
+                <span class="invoice-label">
+                    ORDER DATE
+                </span>
+
+                <strong>
+                    {{ order[6] }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ITEM TABLE -->
+
+    <table class="invoice-items">
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    ITEM
+                </th>
+
+                <th>
+                    PRICE
+                </th>
+
+                <th>
+                    QTY
+                </th>
+
+                <th>
+                    TOTAL
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+
+                    <div class="invoice-product">
+
+                        <div class="invoice-product-icon">
+                            📦
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                {{ order[2] }}
+                            </strong>
+
+                            <span>
+                                CartNexa Product
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+                <td>
+                    ₹{{ "%.2f"|format(order[4]|float) }}
+                </td>
+
+                <td>
+                    {{ order[3] }}
+                </td>
+
+                <td>
+                    <strong>
+                        ₹{{ "%.2f"|format(order[5]|float) }}
+                    </strong>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+    <!-- TOTAL -->
+
+    <div class="invoice-bottom">
+
+        <div class="invoice-note">
+
+            <h3>
+                Thank you for shopping with CartNexa! 🛍️
+            </h3>
+
+            <p>
+                We appreciate your purchase.
+            </p>
+
+        </div>
+
+
+        <div class="invoice-total-box">
+
+            <div class="invoice-total-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong>
+                    ₹{{ "%.2f"|format(order[5]|float) }}
+                </strong>
+
+            </div>
+
+            <div class="invoice-total-row">
+
+                <span>
+                    Shipping
+                </span>
+
+                <strong>
+                    ₹0.00
+                </strong>
+
+            </div>
+
+            <div class="invoice-total-divider"></div>
+
+            <div class="invoice-grand-total">
+
+                <span>
+                    GRAND TOTAL
+                </span>
+
+                <strong>
+                    ₹{{ "%.2f"|format(order[5]|float) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="invoice-footer">
+
+        <div>
+
+            <strong>
+                CartNexa
+            </strong>
+
+            <p>
+                Thank you for choosing us.
+            </p>
+
+        </div>
+
+        <div>
+            Invoice generated electronically.
+        </div>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="invoice-actions">
+
+        <button
+            onclick="window.print()"
+            class="invoice-print-btn"
+        >
+            🖨️ Print Invoice
+        </button>
+
+        <a
+            href="/my-orders"
+            class="invoice-back-btn"
+        >
+            ← Back to My Orders
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

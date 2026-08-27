@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>{{ product[1] }} - CartNexa</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body class="product-details-page">
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar product-details-navbar">
+
+    <div class="details-brand">
+        🛒 <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+    </div>
+
+    <div class="details-nav-links">
+
+        <a href="/user-dashboard">
+            🏠 Dashboard
+        </a>
+
+        <a href="/user-products">
+            🛍️ Products
+        </a>
+
+        <a href="/wishlist">
+            ❤️ Wishlist
+        </a>
+
+        <a href="/my-orders">
+            📦 My Orders
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- BACKGROUND GRAPHICS -->
+
+<div class="details-floating details-float-one">
+    📦
+</div>
+
+<div class="details-floating details-float-two">
+    🛒
+</div>
+
+<div class="details-floating details-float-three">
+    ✨
+</div>
+
+
+<!-- MAIN -->
+
+<div class="product-details-container">
+
+
+    <!-- BACK LINK -->
+
+    <a
+        href="/user-products"
+        class="details-back"
+    >
+        ← Back to Products
+    </a>
+
+
+    <!-- PRODUCT CARD -->
+
+    <div class="product-details-card">
+
+
+        <!-- LEFT PRODUCT VISUAL -->
+
+        <div class="product-visual-section">
+
+            {% if product[4] > 0 %}
+
+                <span class="details-available">
+                    ✓ In Stock
+                </span>
+
+            {% else %}
+
+                <span class="details-unavailable">
+                    Out of Stock
+                </span>
+
+            {% endif %}
+
+
+            <div class="large-product-icon">
+                
+                {% if product[5] %}
+
+                    <img
+                        src="{{ url_for('static', filename='product_images/' + product[5]) }}"
+                        alt="{{ product[1] }}"
+                        class="details-product-image"
+                    >
+
+                {% else %}
+
+                    🛍️
+
+                {% endif %}
+            
+            </div>
+
+
+            <div class="visual-circle visual-circle-one"></div>
+
+            <div class="visual-circle visual-circle-two"></div>
+
+
+            <div class="visual-small-icons">
+
+                <span>📦</span>
+
+                <span>✨</span>
+
+                <span>🛒</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT PRODUCT INFORMATION -->
+
+        <div class="product-information">
+
+
+            <span class="details-category">
+                {{ product[2] }}
+            </span>
+
+
+            <h1>
+                {{ product[1] }}
+            </h1>
+
+
+            <!-- RATING -->
+
+            <div class="details-rating">
+
+                <span>
+                    ⭐⭐⭐⭐⭐
+                </span>
+
+                <strong>
+                    4.5
+                </strong>
+
+                <span class="rating-text">
+                    Customer Rating
+                </span>
+
+            </div>
+
+
+            <div class="details-divider"></div>
+
+
+            <!-- PRICE -->
+
+            <div class="details-price-label">
+                Price
+            </div>
+
+            <div class="details-price">
+
+                ₹{{ "%.2f"|format(product[3]|float) }}
+
+            </div>
+
+
+            <!-- STOCK -->
+
+            <div class="details-stock">
+
+                {% if product[4] > 0 %}
+
+                    <span class="stock-green-dot"></span>
+
+                    <strong>
+                        {{ product[4] }}
+                    </strong>
+
+                    units available
+
+                {% else %}
+
+                    <span class="stock-red-dot"></span>
+
+                    Currently unavailable
+
+                {% endif %}
+
+            </div>
+
+
+            {% if product[4] > 0 %}
+
+
+            <!-- BUY BOX -->
+
+            <div class="buy-box">
+
+
+                <h3>
+                    Select Quantity
+                </h3>
+
+
+                <div class="quantity-control">
+
+
+                    <button
+                        type="button"
+                        id="decreaseQuantity"
+                    >
+                        −
+                    </button>
+
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        value="1"
+                        min="1"
+                        max="{{ product[4] }}"
+                        step="1"
+                    >
+
+
+                    <button
+                        type="button"
+                        id="increaseQuantity"
+                    >
+                        +
+                    </button>
+
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="details-total">
+
+                    <span>
+                        Total Amount
+                    </span>
+
+                    <strong>
+                        ₹<span id="product-total">
+                            {{ "%.2f"|format(product[3]|float) }}
+                        </span>
+                    </strong>
+
+                </div>
+
+
+                <!-- BUY FORM -->
+
+                <form
+                    action="/buy/{{ product[0] }}"
+                    method="POST"
+                    id="buyForm"
+                >
+
+                    <input
+                        type="hidden"
+                        name="quantity"
+                        id="hiddenQuantity"
+                        value="1"
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="details-buy-button"
+                    >
+
+                        🛒 Buy Now
+
+                    </button>
+
+                </form>
+
+
+                <!-- WISHLIST -->
+
+                <form
+                    action="/toggle-wishlist/{{ product[0] }}"
+                    method="POST"
+                    class="wishlist-form"
+                >
+
+                    <button
+                        type="submit"
+                        class="wishlist-button {% if in_wishlist %}wishlist-added{% endif %}"
+                    >
+
+                        {% if in_wishlist %}
+
+                            ❤️ Added to Wishlist
+
+                        {% else %}
+
+                            ♡ Add to Wishlist
+
+                        {% endif %}
+
+                    </button>
+
+                </form>
+
+
+            </div>
+
+
+            <!-- BENEFITS -->
+
+            <div class="purchase-benefits">
+
+
+                <div class="benefit-item">
+
+                    <span>
+                        🔒
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Secure Checkout
+                        </strong>
+
+                        <small>
+                            Safe and simple ordering
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit-item">
+
+                    <span>
+                        🚚
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Easy Delivery
+                        </strong>
+
+                        <small>
+                            Convenient delivery options
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit-item">
+
+                    <span>
+                        💳
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Multiple Payments
+                        </strong>
+
+                        <small>
+                            Choose your preferred method
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- OUT OF STOCK -->
+
+            <div class="out-of-stock-box">
+
+                <div>
+                    📦
+                </div>
+
+                <h3>
+                    Currently Out of Stock
+                </h3>
+
+                <p>
+                    This product is temporarily unavailable.
+                </p>
+
+                <a href="/user-products">
+                    Browse Other Products
+                </a>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     CUSTOMER REVIEWS
+     ========================================= -->
+
+<div class="reviews-section">
+
+
+    <div class="reviews-header">
+
+
+        <div>
+
+            <span class="reviews-label">
+                CUSTOMER FEEDBACK
+            </span>
+
+            <h2>
+                ⭐ Customer Reviews
+            </h2>
+
+            <p>
+                See what CartNexa customers think about this product.
+            </p>
+
+        </div>
+
+
+        <div class="reviews-summary">
+
+            <div class="average-rating">
+                {{ "%.1f"|format(average_rating|float) }}
+            </div>
+
+            <div class="average-stars">
+
+                {% for i in range(1, 6) %}
+
+                    {% if average_rating >= i %}
+                        ★
+                    {% else %}
+                        ☆
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+            <small>
+
+                {{ review_count }}
+
+                review{% if review_count != 1 %}s{% endif %}
+
+            </small>
+
+        </div>
+
+
+        <div class="rating-distribution">
+
+            {% for rating in range(5, 0, -1) %}
+
+            <div class="rating-row">
+
+                <span class="rating-number">
+                    {{ rating }} ★
+                </span>
+
+
+                <div class="rating-bar">
+
+                    <div
+                        class="rating-fill"
+                        style="width: {{ rating_percentages[rating] }}%;"
+                    ></div>
+
+                </div>
+
+
+                <span class="rating-percent">
+                    {{ rating_percentages[rating] }}%
+                </span>
+
+
+                <span class="rating-count">
+                    ({{ rating_distribution[rating] }})
+                </span>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- WRITE REVIEW -->
+
+    {% if not user_review and verified_purchase %}
+
+
+    <div class="review-write-card">
+
+
+        <h3>
+            ✍️ Write a Review
+        </h3>
+
+
+        <p>
+            Share your experience with this product.
+        </p>
+
+
+        <form
+            action="/add-review/{{ product[0] }}"
+            method="POST"
+            class="review-form"
+        >
+
+
+            <label>
+                Your Rating
+            </label>
+
+
+            <div class="star-rating">
+
+
+                <input
+                    type="radio"
+                    name="rating"
+                    value="1"
+                    id="star1"
+                    required
+                >
+
+                <label for="star1">
+                    ★
+                </label>
+
+
+                <input
+                    type="radio"
+                    name="rating"
+                    value="2"
+                    id="star2"
+                >
+
+                <label for="star2">
+                    ★
+                </label>
+
+
+                <input
+                    type="radio"
+                    name="rating"
+                    value="3"
+                    id="star3"
+                >
+
+                <label for="star3">
+                    ★
+                </label>
+
+
+                <input
+                    type="radio"
+                    name="rating"
+                    value="4"
+                    id="star4"
+                >
+
+                <label for="star4">
+                    ★
+                </label>
+
+
+                <input
+                    type="radio"
+                    name="rating"
+                    value="5"
+                    id="star5"
+                >
+
+                <label for="star5">
+                    ★
+                </label>
+
+
+            </div>
+
+
+            <label>
+                Your Review
+            </label>
+
+
+            <textarea
+                name="review_text"
+                rows="4"
+                maxlength="500"
+                placeholder="Tell us about your experience..."
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="submit-review-btn"
+            >
+
+                ⭐ Submit Review
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+    {% elif not verified_purchase %}
+
+
+    <div class="review-purchase-required">
+
+
+        <div class="review-purchase-icon">
+            🛍️
+        </div>
+
+
+        <h3>
+            Purchase this product to review it
+        </h3>
+
+
+        <p>
+            Only customers who have purchased this product can leave a review.
+        </p>
+
+
+        <a
+            href="/user-products"
+            class="review-shop-button"
+        >
+
+            🛒 Continue Shopping
+
+        </a>
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <div class="your-review-card">
+
+        <h3>
+            ✓ You have already reviewed this product
+        </h3>
+
+        <p>
+            You can only review a product once.
+        </p>
+
+    </div>
+
+
+    {% endif %}
+
+
+    <!-- REVIEWS -->
+
+    {% if reviews %}
+
+
+    <div class="reviews-list">
+
+
+        {% for review in reviews %}
+
+
+        <div class="review-card">
+
+
+            <div class="review-user">
+
+
+                <div class="review-avatar">
+
+                    {{ review[4][0]|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ review[4] }}
+                    </strong>
+
+
+                    {% if review[5] == 1 %}
+
+                        <span class="verified-purchase-badge">
+                            ✓ Verified Purchase
+                        </span>
+
+                    {% endif %}
+
+
+                    <small>
+                        {{ review[3] }}
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="review-stars">
+
+                {% for i in range(1, 6) %}
+
+                    {% if review[1] >= i %}
+                        ★
+                    {% else %}
+                        ☆
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="review-helpful">
+
+
+                <form
+                    action="/review/{{ review[0] }}/helpful"
+                    method="POST"
+                >
+
+                    <button
+                        type="submit"
+                        class="helpful-button"
+                    >
+
+                        👍 Helpful
+
+                        <span class="helpful-count">
+                            {{ review[6] }}
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+            </div>
+
+
+            {% if review[2] %}
+
+            <p class="review-text">
+                {{ review[2] }}
+            </p>
+
+            {% endif %}
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <div class="no-reviews">
+
+        ⭐
+
+        <h3>
+            No reviews yet
+        </h3>
+
+        <p>
+            Be the first customer to review this product!
+        </p>
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+<!-- =========================================
+     CARTNEXA CHECKOUT CONFIRMATION MODAL
+     ========================================= -->
+
+<div
+    class="checkout-modal-overlay"
+    id="checkoutModal"
+>
+
+
+    <div class="checkout-modal">
+
+
+        <!-- CLOSE BUTTON -->
+
+        <button
+            type="button"
+            class="checkout-modal-close"
+            id="checkoutModalClose"
+        >
+            ×
+        </button>
+
+
+        <!-- ANIMATED CART -->
+
+        <div class="checkout-modal-icon">
+            🛒
+        </div>
+
+
+        <!-- SPARKLES -->
+
+        <div class="checkout-modal-sparkle sparkle-one">
+            ✨
+        </div>
+
+
+        <div class="checkout-modal-sparkle sparkle-two">
+            ✨
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h2>
+            Ready for Checkout?
+        </h2>
+
+
+        <p class="checkout-modal-message">
+            Your product is ready to be ordered.
+        </p>
+
+
+        <!-- ORDER DETAILS -->
+
+        <div class="checkout-modal-details">
+
+
+            <div>
+
+                <span>
+                    Product
+                </span>
+
+                <strong>
+                    {{ product[1] }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Quantity
+                </span>
+
+                <strong id="modalQuantity">
+                    1
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Total Amount
+                </span>
+
+                <strong class="modal-total">
+
+                    ₹<span id="modalTotal">
+                        {{ "%.2f"|format(product[3]|float) }}
+                    </span>
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="checkout-modal-actions">
+
+
+            <button
+                type="button"
+                class="modal-cancel-btn"
+                id="checkoutModalCancel"
+            >
+
+                ✕ Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                class="modal-continue-btn"
+                id="checkoutModalContinue"
+            >
+
+                ✓ Continue to Checkout
+
+            </button>
+
+
+        </div>
+
+
+        <!-- SECURITY -->
+
+        <div class="checkout-modal-secure">
+            🔒 Secure CartNexa Checkout
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =========================================
+   QUANTITY CONTROLS
+   ========================================= */
+
+const quantityInput =
+    document.getElementById(
+        "quantity"
+    );
+
+
+const totalElement =
+    document.getElementById(
+        "product-total"
+    );
+
+
+const hiddenQuantity =
+    document.getElementById(
+        "hiddenQuantity"
+    );
+
+
+const cartQuantity =
+    document.getElementById(
+        "cartQuantity"
+    );
+
+
+const increaseButton =
+    document.getElementById(
+        "increaseQuantity"
+    );
+
+
+const decreaseButton =
+    document.getElementById(
+        "decreaseQuantity"
+    );
+
+
+const price =
+    parseFloat(
+        "{{ product[3] }}"
+    ) || 0;
+
+
+const maxStock =
+    parseInt(
+        "{{ product[4] }}"
+    ) || 1;
+
+
+/* =========================================
+   UPDATE TOTAL
+   ========================================= */
+
+function updateTotal() {
+
+
+    if (!quantityInput) {
+        return;
+    }
+
+
+    let quantity =
+        parseInt(
+            quantityInput.value
+        ) || 1;
+
+
+    if (quantity < 1) {
+
+        quantity = 1;
+
+    }
+
+
+    if (quantity > maxStock) {
+
+        quantity = maxStock;
+
+    }
+
+
+    quantityInput.value =
+        quantity;
+
+
+    if (hiddenQuantity) {
+
+        hiddenQuantity.value =
+            quantity;
+
+    }
+
+
+    if (cartQuantity) {
+
+        cartQuantity.value =
+            quantity;
+
+    }
+
+
+    const total =
+        quantity * price;
+
+
+    if (totalElement) {
+
+        totalElement.textContent =
+            total.toFixed(2);
+
+    }
+
+}
+
+
+/* =========================================
+   PLUS BUTTON
+   ========================================= */
+
+if (increaseButton) {
+
+    increaseButton.addEventListener(
+        "click",
+        function() {
+
+
+            let quantity =
+                parseInt(
+                    quantityInput.value
+                ) || 1;
+
+
+            if (quantity < maxStock) {
+
+                quantity++;
+
+                quantityInput.value =
+                    quantity;
+
+                updateTotal();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   MINUS BUTTON
+   ========================================= */
+
+if (decreaseButton) {
+
+    decreaseButton.addEventListener(
+        "click",
+        function() {
+
+
+            let quantity =
+                parseInt(
+                    quantityInput.value
+                ) || 1;
+
+
+            if (quantity > 1) {
+
+                quantity--;
+
+                quantityInput.value =
+                    quantity;
+
+                updateTotal();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   MANUAL QUANTITY INPUT
+   ========================================= */
+
+if (quantityInput) {
+
+    quantityInput.addEventListener(
+        "input",
+        updateTotal
+    );
+
+}
+
+
+/* =========================================
+   CHECKOUT MODAL ELEMENTS
+   ========================================= */
+
+const buyForm =
+    document.getElementById(
+        "buyForm"
+    );
+
+
+const checkoutModal =
+    document.getElementById(
+        "checkoutModal"
+    );
+
+
+const checkoutModalClose =
+    document.getElementById(
+        "checkoutModalClose"
+    );
+
+
+const checkoutModalCancel =
+    document.getElementById(
+        "checkoutModalCancel"
+    );
+
+
+const checkoutModalContinue =
+    document.getElementById(
+        "checkoutModalContinue"
+    );
+
+
+const modalQuantity =
+    document.getElementById(
+        "modalQuantity"
+    );
+
+
+const modalTotal =
+    document.getElementById(
+        "modalTotal"
+    );
+
+
+/* =========================================
+   OPEN CHECKOUT MODAL
+   ========================================= */
+
+if (buyForm) {
+
+    buyForm.addEventListener(
+        "submit",
+        function(event) {
+
+
+            /* STOP FORM FROM
+               SUBMITTING IMMEDIATELY */
+
+            event.preventDefault();
+
+
+            updateTotal();
+
+
+            const quantity =
+                parseInt(
+                    quantityInput.value
+                ) || 1;
+
+
+            /* VALIDATE */
+
+            if (
+                quantity < 1 ||
+                quantity > maxStock
+            ) {
+
+                alert(
+                    "Please enter a valid quantity."
+                );
+
+                return;
+
+            }
+
+
+            /* UPDATE MODAL QUANTITY */
+
+            if (modalQuantity) {
+
+                modalQuantity.textContent =
+                    quantity;
+
+            }
+
+
+            /* UPDATE MODAL TOTAL */
+
+            if (modalTotal) {
+
+                modalTotal.textContent =
+                    (
+                        quantity * price
+                    ).toFixed(2);
+
+            }
+
+
+            /* SHOW MODAL */
+
+            if (checkoutModal) {
+
+                checkoutModal.classList.add(
+                    "show"
+                );
+
+                document.body.classList.add(
+                    "modal-open"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   CLOSE MODAL FUNCTION
+   ========================================= */
+
+function closeCheckoutModal() {
+
+
+    if (checkoutModal) {
+
+        checkoutModal.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+   ========================================= */
+
+if (checkoutModalClose) {
+
+    checkoutModalClose.addEventListener(
+        "click",
+        function() {
+
+            closeCheckoutModal();
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   CANCEL BUTTON
+   ========================================= */
+
+if (checkoutModalCancel) {
+
+    checkoutModalCancel.addEventListener(
+        "click",
+        function() {
+
+            closeCheckoutModal();
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   CONTINUE TO CHECKOUT
+   ========================================= */
+
+if (checkoutModalContinue) {
+
+    checkoutModalContinue.addEventListener(
+        "click",
+        function() {
+
+
+            /* UPDATE QUANTITY */
+
+            updateTotal();
+
+
+            /* DISABLE BUY BUTTON */
+
+            const buyButton =
+                buyForm.querySelector(
+                    ".details-buy-button"
+                );
+
+
+            if (buyButton) {
+
+                buyButton.classList.add(
+                    "processing"
+                );
+
+                buyButton.innerHTML =
+                    "⏳ Processing...";
+
+                buyButton.disabled =
+                    true;
+
+            }
+
+
+            /* CLOSE MODAL */
+
+            closeCheckoutModal();
+
+
+            /* SUBMIT FORM */
+
+            buyForm.submit();
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE MODAL
+   ========================================= */
+
+if (checkoutModal) {
+
+    checkoutModal.addEventListener(
+        "click",
+        function(event) {
+
+
+            if (
+                event.target ===
+                checkoutModal
+            ) {
+
+                closeCheckoutModal();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   ESCAPE KEY
+   ========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+
+        if (
+            event.key === "Escape" &&
+            checkoutModal &&
+            checkoutModal.classList.contains(
+                "show"
+            )
+        ) {
+
+            closeCheckoutModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   REAL STAR RATING
+   ========================================= */
+
+const ratingInputs =
+    document.querySelectorAll(
+        ".star-rating input"
+    );
+
+
+const ratingLabels =
+    document.querySelectorAll(
+        ".star-rating label"
+    );
+
+
+/* UPDATE STARS */
+
+function updateStars(rating) {
+
+
+    ratingLabels.forEach(
+        function(label) {
+
+
+            const starNumber =
+                parseInt(
+                    label
+                        .getAttribute("for")
+                        .replace(
+                            "star",
+                            ""
+                        )
+                );
+
+
+            if (
+                starNumber <= rating
+            ) {
+
+                label.classList.add(
+                    "active"
+                );
+
+            }
+            else {
+
+                label.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* RATING CHANGE */
+
+ratingInputs.forEach(
+    function(input) {
+
+
+        input.addEventListener(
+            "change",
+            function() {
+
+
+                const rating =
+                    parseInt(
+                        this.value
+                    );
+
+
+                updateStars(
+                    rating
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* STAR HOVER */
+
+ratingLabels.forEach(
+    function(label) {
+
+
+        label.addEventListener(
+            "mouseenter",
+            function() {
+
+
+                const rating =
+                    parseInt(
+                        this
+                            .getAttribute("for")
+                            .replace(
+                                "star",
+                                ""
+                            )
+                    );
+
+
+                ratingLabels.forEach(
+                    function(item) {
+
+
+                        const starNumber =
+                            parseInt(
+                                item
+                                    .getAttribute("for")
+                                    .replace(
+                                        "star",
+                                        ""
+                                    )
+                            );
+
+
+                        if (
+                            starNumber <= rating
+                        ) {
+
+                            item.classList.add(
+                                "hovered"
+                            );
+
+                        }
+                        else {
+
+                            item.classList.remove(
+                                "hovered"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        label.addEventListener(
+            "mouseleave",
+            function() {
+
+
+                ratingLabels.forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "hovered"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>

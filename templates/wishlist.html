@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Wishlist - CartNexa</title>
+
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="wishlist-page">
+    <!-- NAVBAR -->
+
+    <nav class="navbar wishlist-navbar">
+      <div class="wishlist-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+      </div>
+
+      <div class="wishlist-nav-links">
+        <a href="/user-dashboard"> 🏠 Dashboard </a>
+
+        <a href="/user-products"> 🛍️ Products </a>
+
+        <a href="/wishlist" class="wishlist-nav-active"> ❤️ Wishlist </a>
+
+        <a href="/my-orders"> 📦 My Orders </a>
+
+        <a href="/logout"> Logout </a>
+      </div>
+    </nav>
+
+    <!-- FLOATING GRAPHICS -->
+
+    <div class="wishlist-floating wishlist-float-one">❤️</div>
+
+    <div class="wishlist-floating wishlist-float-two">🛍️</div>
+
+    <div class="wishlist-floating wishlist-float-three">✨</div>
+
+    <div class="wishlist-floating wishlist-float-four">💝</div>
+
+    <!-- MAIN -->
+
+    <div class="wishlist-container">
+      <!-- HEADER -->
+
+      <div class="wishlist-header">
+        <div class="wishlist-header-label">
+          <p class="wishlist-label">CARTNEXA FAVORITES</p>
+
+          <h1>My Wishlist <span> ❤️ </span></h1>
+
+          <p>Products you love and want to buy later.</p>
+        </div>
+
+        <div class="wishlist-hero-graphic">
+          <div class="wishlist-head-large">❤️</div>
+
+          <div class="wishlist-heart-small heart-one">💕</div>
+
+          <div class="wishlist-heart-small heart-two">✨</div>
+        </div>
+      </div>
+
+      {% if wishlist_items %}
+
+      <!-- COUNT -->
+
+      <div class="wishlist-count">
+        <div class="wishlist-count-left">
+          <div class="wishlist-count-icon">❤️</div>
+
+          <div>
+            <span> Total Items </span>
+
+            <strong>
+              {{ wishlist_items|length }} item{% if wishlist_items|length != 1
+              %}s{% endif %}
+            </strong>
+          </div>
+        </div>
+
+        <a href="/user-products" class="wishlist-continue-btn">
+          🛍️ Continue Shopping
+        </a>
+      </div>
+
+      <!-- PRODUCTS -->
+
+      <div class="wishlist-grid">
+        {% for item in wishlist_items %}
+
+        <div class="wishlist-card">
+          <!-- PRODUCT GRAPHIC -->
+
+          <div class="wishlist-product-image">
+            {% if item[5] > 0 %}
+
+            <span class="wishlist-stock-badge"> ✓ In Stock </span>
+
+            {% else %}
+
+            <span class="wishlist-out-stock-badge"> Out of Stock </span>
+
+            {% endif %}
+
+            <div class="wishlist-product-icon">
+              {% if item[6] %}
+
+              <img
+                src="{{ url_for('static', filename='product_images/' + item[6]) }}"
+                alt="{{ item[2] }}"
+                class="wishlist-product-image"
+              />
+
+              {% else %} 🛍️ {% endif %}
+            </div>
+
+            <div class="wishlist-mini-graphics">📦 ✨</div>
+          </div>
+
+          <!-- PRODUCT DETAILS -->
+
+          <div class="wishlist-product-info">
+            <span class="wishlist-category"> {{ item[3] }} </span>
+
+            <h2>{{ item[2] }}</h2>
+
+            <div class="wishlist-rating">
+              ⭐⭐⭐⭐⭐
+              <span>4.5</span>
+            </div>
+
+            <div class="wishlist-price">
+              ₹{{ "%.2f"|format(item[4]|float) }}
+            </div>
+
+            {% if item[5] > 0 %}
+
+            <p class="wishlist-available">● {{ item[5] }} units available</p>
+
+            {% else %}
+
+            <p class="wishlist-unavailable">● Currently unavailable</p>
+
+            {% endif %}
+
+            <!-- ACTIONS -->
+
+            <div class="wishlist-actions">
+              <a href="/user-product/{{ item[1] }}" class="wishlist-view-btn">
+                👁 View Product
+              </a>
+
+              <form action="/toggle-wishlist/{{ item[1] }}" method="POST">
+                <button
+                  type="submit"
+                  class="wishlist-remove-btn"
+                  title="Remove from wishlist"
+                >
+                  ❤️
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <!-- SHOP MORE -->
+
+      <div class="wishlist-shopping-box">
+        <div class="wishlist-shopping-icon">🛍️</div>
+
+        <div>
+          <h3>Looking for something else?</h3>
+
+          <p>Explore more products from CartNexa.</p>
+        </div>
+
+        <a href="/user-products" class="wishlist-shop-btn"> Browse Products </a>
+      </div>
+
+      {% else %}
+
+      <!-- EMPTY WISHLIST -->
+
+      <div class="wishlist-empty">
+        <div class="wishlist-empty-heart">♡</div>
+
+        <h2>Your Wishlist is Empty</h2>
+
+        <p>Save products you love and come back to them later.</p>
+
+        <a href="/user-products" class="wishlist-empty-btn">
+          🛍️ Start Shopping
+        </a>
+      </div>
+
+      {% endif %}
+    </div>
+
+    <script>
+      /* =========================================
+   WISHLIST CARD ANIMATION
+   ========================================= */
+
+      const wishlistCards = document.querySelectorAll(".wishlist-card");
+
+      wishlistCards.forEach(function (card, index) {
+        card.style.animationDelay = index * 0.08 + "s";
+      });
+
+      /* =========================================
+   REMOVE BUTTON CONFIRMATION
+   ========================================= */
+
+      const removeButtons = document.querySelectorAll(".wishlist-remove-btn");
+
+      removeButtons.forEach(function (button) {
+        button.closest("form").addEventListener("submit", function (event) {
+          const confirmed = confirm("Remove this product from your wishlist?");
+
+          if (!confirmed) {
+            event.preventDefault();
+
+            return;
+          }
+
+          /* HEART ANIMATION */
+
+          button.classList.add("wishlist-removing");
+
+          button.innerHTML = "💔";
+
+          button.disabled = true;
+
+          /* CARD ANIMATION */
+
+          const card = button.closest(".wishlist-card");
+
+          if (card) {
+            card.classList.add("wishlist-card-removing");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

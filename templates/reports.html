@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Reports - CartNexa</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="admin-reports-page">
+    <nav class="navbar products-navbar">
+      <div class="products-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+      </div>
+
+      <div class="products-nav-links">
+        <a href="/dashboard"> 🏠 Dashboard </a>
+
+        <a href="/products"> 🛍️ Products </a>
+
+        <a href="/sales"> 💰 Sales </a>
+
+        <a href="/purchases"> 🛒 Purchases </a>
+
+        <a href="/suppliers"> 🚚 Suppliers </a>
+
+        <a href="/reports"> 📊 Reports </a>
+
+        <a href="/admin/orders"> 📦 Orders </a>
+
+        <a href="/logout"> Logout </a>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="admin-reports-header">
+        <div>
+          <span class="admin-reports-label"> CARTNEXA ANALYTICS </span>
+
+          <h1>Reports 📊</h1>
+
+          <p>View your inventory, sales, purchases and profit summary.</p>
+        </div>
+
+        <div class="admin-reports-header-icon">📈</div>
+      </div>
+      <form method="GET" action="/reports" class="admin-report-filter">
+        <div class="report-filter-label">
+          📅
+          <span>Report Period</span>
+        </div>
+
+        <select name="period">
+          <option value="all">All Time</option>
+
+          <option value="today">Today</option>
+
+          <option value="month">This Month</option>
+        </select>
+
+        <button type="submit">
+          Apply
+          <span>→</span>
+        </button>
+      </form>
+      <br />
+      <p>View your inventory sales and purchase summary.</p>
+
+      <div class="cards admin-reports-cards">
+        <!-- TOTAL SALES -->
+        <div class="card admin-report-stat-card">
+          <div class="admin-report-stat-icon">💰</div>
+
+          <div>
+            <h3>Total Sales</h3>
+
+            <h2>₹{{ "%.2f"|format(total_sales|float) }}</h2>
+
+            <span> Total revenue </span>
+          </div>
+        </div>
+
+        <!-- TOTAL PURCHASES -->
+        <div class="card admin-report-stat-card">
+          <div class="admin-report-stat-icon">🛒</div>
+
+          <div>
+            <h3>Total Purchases</h3>
+
+            <h2>₹{{ "%.2f"|format(total_purchases|float) }}</h2>
+
+            <span> Total spending </span>
+          </div>
+        </div>
+
+        <!-- TOTAL PROFIT -->
+        <div class="card admin-report-stat-card">
+          <div class="admin-report-stat-icon">📈</div>
+
+          <div>
+            <h3>Total Profit</h3>
+
+            <h2>₹{{ "%.2f"|format(profit|float) }}</h2>
+
+            <span> Net profit </span>
+          </div>
+        </div>
+
+        <!-- ITEMS SOLD -->
+        <div class="card admin-report-stat-card">
+          <div class="admin-report-stat-icon">📦</div>
+
+          <div>
+            <h3>Items Sold</h3>
+
+            <h2>{{ items_sold }}</h2>
+
+            <span> Total units sold </span>
+          </div>
+        </div>
+
+        <!-- ITEMS PURCHASED -->
+        <div class="card admin-report-stat-card">
+          <div class="admin-report-stat-icon">📥</div>
+
+          <div>
+            <h3>Items Purchased</h3>
+
+            <h2>{{ items_purchased }}</h2>
+
+            <span> Total units purchased </span>
+          </div>
+        </div>
+      </div>
+
+      <h2>Product Profit</h2>
+
+      <table class="admin-profit-table">
+        <thead>
+          <tr>
+            <th>📦 Product</th>
+            <th>🔢 Sold</th>
+            <th>💰 Revenue</th>
+            <th>💵 Purchase Cost</th>
+            <th>📈 Profit</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for product in product_profits %}
+
+          <tr>
+            <td>
+              <strong> {{ product[0] }} </strong>
+            </td>
+
+            <td>
+              <span class="profit-sold-badge"> {{ product[1] }} </span>
+            </td>
+
+            <td>₹{{ "%.2f"|format(product[2]|float) }}</td>
+
+            <td>₹{{ "%.2f"|format(product[3]|float) }}</td>
+
+            <td>
+              <strong class="profit-amount">
+                ₹{{ "%.2f"|format(product[4]|float) }}
+              </strong>
+            </td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- ADMIN BACKGROUND GRAPHICS -->
+
+    <div class="admin-floating admin-float-one">📦</div>
+
+    <div class="admin-floating admin-float-two">🛒</div>
+
+    <div class="admin-floating admin-float-three">💳</div>
+
+    <div class="admin-floating admin-float-four">✨</div>
+  </body>
+</html>

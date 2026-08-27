@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Suppliers - Inventary</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="admin-suppliers-page">
+    <nav class="navbar products-navbar">
+      <div class="products-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+      </div>
+
+      <div class="products-nav-links">
+        <a href="/dashboard"> 🏠 Dashboard </a>
+
+        <a href="/products"> 🛍️ Products </a>
+
+        <a href="/sales"> 💰 Sales </a>
+
+        <a href="/purchases"> 🛒 Purchases </a>
+
+        <a href="/suppliers"> 🚚 Suppliers </a>
+
+        <a href="/reports"> 📊 Reports </a>
+
+        <a href="/admin/orders"> 📦 Orders </a>
+
+        <a href="/logout"> Logout </a>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="admin-suppliers-header">
+        <div>
+          <span class="admin-suppliers-label"> CARTNEXA MANAGEMENT </span>
+
+          <h1>Suppliers 🚚</h1>
+
+          <p>Manage your product suppliers and supplier information.</p>
+        </div>
+
+        <div class="admin-suppliers-header-icon">🚚</div>
+      </div>
+      <form action="/suppliers" method="POST" class="admin-suppliers-form">
+        <label>Supplier Name</label>
+        <input name="name" placeholder="Enter supplier name" required />
+
+        <label>Phone</label>
+        <input name="phone" placeholder="Enter phone number" />
+
+        <label>Email</label>
+        <input name="email" type="email" placeholder="Enter email" />
+
+        <label>Company</label>
+        <input name="company" placeholder="Enter company name" />
+
+        <button type="submit" class="admin-submit-supplier-btn">
+          <span>＋</span>
+          Add Supplier
+        </button>
+      </form>
+
+      <br /><br />
+
+      <h2>Supplier List</h2>
+
+      <table class="admin-supplier-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>👤 Name</th>
+            <th>📞 Phone</th>
+            <th>📧 Email</th>
+            <th>🏢 Company</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for supplier in suppliers %}
+
+          <tr>
+            <td>
+              <span class="supplier-id-badge"> #{{ supplier[0] }} </span>
+            </td>
+
+            <td>
+              <strong> {{ supplier[1] }} </strong>
+            </td>
+
+            <td>{{ supplier[2] or 'Not Provided' }}</td>
+
+            <td>{{ supplier[3] or 'Not Provided' }}</td>
+
+            <td>
+              <span class="supplier-company">
+                {{ supplier[4] or 'Not Provided' }}
+              </span>
+            </td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- ADMIN BACKGROUND GRAPHICS -->
+
+    <div class="admin-floating admin-float-one">📦</div>
+
+    <div class="admin-floating admin-float-two">🛒</div>
+
+    <div class="admin-floating admin-float-three">💳</div>
+
+    <div class="admin-floating admin-float-four">✨</div>
+  </body>
+</html>

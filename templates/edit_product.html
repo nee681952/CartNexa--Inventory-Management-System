@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Product - CartNexa</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body class="admin-edit-product-page">
+
+
+<!-- NAVBAR -->
+
+<!-- ADMIN NAVBAR -->
+
+<nav class="navbar products-navbar">
+
+    <div class="products-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+    </div>
+
+    <div class="products-nav-links">
+
+        <a href="/dashboard">
+            🏠 Dashboard
+        </a>
+
+        <a href="/products">
+            🛍️ Products
+        </a>
+
+        <a href="/sales">
+            💰 Sales
+        </a>
+
+        <a href="/purchases">
+            🛒 Purchases
+        </a>
+
+        <a href="/suppliers">
+            🚚 Suppliers
+        </a>
+
+        <a href="/reports">
+            📊 Reports
+        </a>
+
+        <a href="/admin/orders">
+            📦 Orders
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- BACKGROUND GRAPHICS -->
+
+<div class="edit-floating edit-float-one">
+    📦
+</div>
+
+<div class="edit-floating edit-float-two">
+    ✏️
+</div>
+
+<div class="edit-floating edit-float-three">
+    💰
+</div>
+
+<div class="edit-floating edit-float-four">
+    ✨
+</div>
+
+
+<!-- MAIN -->
+
+<div class="container edit-product-container">
+
+
+    <!-- HEADER -->
+
+    <div class="edit-product-header">
+
+        <div>
+
+            <span class="edit-product-label">
+                CARTNEXA INVENTORY
+            </span>
+
+            <h1>
+                Edit Product ✏️
+            </h1>
+
+            <p>
+                Update product information.
+            </p>
+
+        </div>
+
+
+        <div class="edit-product-hero-icon">
+            ✏️
+        </div>
+
+    </div>
+
+
+    <!-- FORM CARD -->
+
+    <div class="edit-product-card">
+
+        <form
+            method="POST"
+            class="product-form edit-product-form"
+        >
+
+
+            <!-- PRODUCT NAME -->
+
+            <div class="edit-form-group">
+
+                <label>
+                    📦 Product Name
+                </label>
+
+                <input
+                    name="name"
+                    value="{{ product[1] }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PRICE -->
+
+            <div class="edit-form-group">
+
+                <label>
+                    💰 Price
+                </label>
+
+                <input
+                    name="price"
+                    type="number"
+                    step="0.01"
+                    value="{{ product[2] }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- QUANTITY -->
+
+            <div class="edit-form-group">
+
+                <label>
+                    📊 Quantity
+                </label>
+
+                <input
+                    name="quantity"
+                    type="number"
+                    value="{{ product[3] }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- CATEGORY -->
+
+            <div class="edit-form-group">
+
+                <label>
+                    🏷️ Category
+                </label>
+
+                <select
+                    name="category"
+                    required
+                >
+
+                    {% for category in categories %}
+
+                        <option
+                            value="{{ category[1] }}"
+                            {% if category[1] == product[4] %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ category[1] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="edit-product-submit"
+            >
+                ✏️ Update Product
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    <!-- BACK -->
+
+    <div class="edit-product-back">
+
+        <a href="/products">
+            ← Back to Products
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+/* =========================================
+   EDIT PRODUCT FORM ANIMATION
+   ========================================= */
+
+const formGroups =
+    document.querySelectorAll(
+        ".edit-form-group"
+    );
+
+
+formGroups.forEach(
+    function(group, index) {
+
+        group.style.animationDelay =
+            (index * 0.1) + "s";
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

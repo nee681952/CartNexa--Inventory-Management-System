@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Welcome - CartNexa</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            height: 100vh;
+            font-family: Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 20% 20%, rgba(96,165,250,0.35), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(167,139,250,0.35), transparent 30%),
+                linear-gradient(135deg, #0f172a, #1e3a8a, #312e81);
+
+            color: white;
+        }
+
+
+        /* =========================================
+           BACKGROUND PARTICLES
+           ========================================= */
+
+        .particle {
+            position: absolute;
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.65);
+
+            animation: particleFloat 7s infinite ease-in-out;
+        }
+
+
+        .particle:nth-child(1) {
+            left: 8%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            left: 18%;
+            top: 70%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(3) {
+            left: 32%;
+            top: 15%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(4) {
+            left: 50%;
+            top: 80%;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(5) {
+            left: 67%;
+            top: 18%;
+            animation-delay: 1.5s;
+        }
+
+        .particle:nth-child(6) {
+            left: 82%;
+            top: 65%;
+            animation-delay: 2.5s;
+        }
+
+        .particle:nth-child(7) {
+            left: 92%;
+            top: 30%;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(8) {
+            left: 40%;
+            top: 45%;
+            animation-delay: 2s;
+        }
+
+
+        @keyframes particleFloat {
+
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: translateY(-45px) scale(1.5);
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =========================================
+           FLOATING E-COMMERCE GRAPHICS
+           ========================================= */
+
+        .floating-icon {
+            position: absolute;
+
+            font-size: 55px;
+
+            opacity: 0.18;
+
+            animation: floatingIcon 5s ease-in-out infinite;
+        }
+
+
+        .icon-one {
+            left: 8%;
+            top: 25%;
+        }
+
+        .icon-two {
+            right: 10%;
+            top: 22%;
+            animation-delay: 1s;
+        }
+
+        .icon-three {
+            left: 13%;
+            bottom: 18%;
+            animation-delay: 2s;
+        }
+
+        .icon-four {
+            right: 12%;
+            bottom: 17%;
+            animation-delay: 3s;
+        }
+
+        .icon-five {
+            left: 25%;
+            bottom: 8%;
+            animation-delay: 1.5s;
+        }
+
+        .icon-six {
+            right: 27%;
+            top: 9%;
+            animation-delay: 2.5s;
+        }
+
+
+        @keyframes floatingIcon {
+
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(8deg);
+            }
+
+        }
+
+
+        /* =========================================
+           ROTATING CIRCLES
+           ========================================= */
+
+        .circle {
+            position: absolute;
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            border-radius: 50%;
+
+            animation: rotateCircle 18s linear infinite;
+        }
+
+
+        .circle-one {
+            width: 450px;
+            height: 450px;
+        }
+
+        .circle-two {
+            width: 650px;
+            height: 650px;
+
+            animation-direction: reverse;
+            animation-duration: 25s;
+        }
+
+
+        @keyframes rotateCircle {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =========================================
+           WELCOME CARD
+           ========================================= */
+
+        .welcome-card {
+
+            position: relative;
+
+            width: 620px;
+            max-width: 90%;
+
+            padding: 55px 40px;
+
+            text-align: center;
+
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.10);
+
+            border: 1px solid rgba(255,255,255,0.20);
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.35);
+
+            animation: cardAppear 1.2s ease;
+
+            z-index: 10;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(45px) scale(0.92);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+
+        /* =========================================
+           LOGO
+           ========================================= */
+
+        .logo-wrapper {
+
+            width: 115px;
+            height: 115px;
+
+            margin: 0 auto 25px;
+
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: rgba(255,255,255,0.14);
+
+            border: 2px solid rgba(255,255,255,0.25);
+
+            box-shadow:
+                0 0 35px rgba(255,255,255,0.15);
+
+            animation:
+                logoBounce 2.5s ease-in-out infinite,
+                logoGlow 2s ease-in-out infinite alternate;
+        }
+
+
+        .logo {
+            font-size: 65px;
+        }
+
+
+        @keyframes logoBounce {
+
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(5deg);
+            }
+
+        }
+
+
+        @keyframes logoGlow {
+
+            from {
+                box-shadow:
+                    0 0 20px rgba(255,255,255,0.10);
+            }
+
+            to {
+                box-shadow:
+                    0 0 45px rgba(255,255,255,0.30);
+            }
+
+        }
+
+
+        /* =========================================
+           TITLE
+           ========================================= */
+
+        .welcome-card h1 {
+
+            font-size: 46px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 12px;
+
+            animation: titleReveal 1.5s ease;
+        }
+
+
+        .welcome-card h1 span {
+
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #93c5fd,
+                #c4b5fd,
+                #ffffff
+            );
+
+            background-size: 300%;
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: gradientMove 4s linear infinite;
+        }
+
+
+        @keyframes gradientMove {
+
+            from {
+                background-position: 0%;
+            }
+
+            to {
+                background-position: 300%;
+            }
+
+        }
+
+
+        @keyframes titleReveal {
+
+            from {
+                opacity: 0;
+                letter-spacing: 12px;
+            }
+
+            to {
+                opacity: 1;
+                letter-spacing: 1px;
+            }
+
+        }
+
+
+        /* =========================================
+           SUBTITLE
+           ========================================= */
+
+        .subtitle {
+
+            font-size: 19px;
+
+            opacity: 0.85;
+
+            margin-bottom: 30px;
+
+            animation: fadeUp 1.8s ease;
+        }
+
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 0.85;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================================
+           FEATURE ICONS
+           ========================================= */
+
+        .features {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 35px;
+
+            margin-bottom: 32px;
+        }
+
+
+        .feature {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 7px;
+
+            font-size: 13px;
+
+            opacity: 0.85;
+
+            animation: featureAppear 2s ease;
+        }
+
+
+        .feature-icon {
+
+            font-size: 30px;
+
+            animation: featureFloat 2.5s ease-in-out infinite;
+        }
+
+
+        .feature:nth-child(2) .feature-icon {
+            animation-delay: 0.4s;
+        }
+
+        .feature:nth-child(3) .feature-icon {
+            animation-delay: 0.8s;
+        }
+
+
+        @keyframes featureFloat {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+
+        }
+
+
+        @keyframes featureAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 0.85;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================================
+           LOADING
+           ========================================= */
+
+        .loading-text {
+
+            font-size: 14px;
+
+            opacity: 0.7;
+
+            margin-bottom: 10px;
+        }
+
+
+        .loading {
+
+            width: 300px;
+
+            max-width: 90%;
+
+            height: 7px;
+
+            margin: auto;
+
+            background: rgba(255,255,255,0.15);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+
+        .loading-bar {
+
+            height: 100%;
+
+            width: 0%;
+
+            border-radius: 20px;
+
+            background: linear-gradient(
+                90deg,
+                #60a5fa,
+                #a78bfa,
+                #ffffff
+            );
+
+            animation: loading 6s linear forwards;
+        }
+
+
+        @keyframes loading {
+
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 100%;
+            }
+
+        }
+
+
+        /* =========================================
+           SPARKLES
+           ========================================= */
+
+        .sparkle {
+
+            position: absolute;
+
+            font-size: 25px;
+
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+
+        .sparkle-one {
+            top: 20px;
+            left: 35px;
+        }
+
+        .sparkle-two {
+            top: 35px;
+            right: 45px;
+            animation-delay: 0.7s;
+        }
+
+        .sparkle-three {
+            bottom: 30px;
+            left: 55px;
+            animation-delay: 1.2s;
+        }
+
+        .sparkle-four {
+            bottom: 35px;
+            right: 55px;
+            animation-delay: 1.8s;
+        }
+
+
+        @keyframes sparkle {
+
+            0%, 100% {
+                transform: scale(0.7) rotate(0deg);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(1.3) rotate(20deg);
+                opacity: 1;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ROTATING BACKGROUND CIRCLES -->
+
+<div class="circle circle-one"></div>
+<div class="circle circle-two"></div>
+
+
+<!-- BACKGROUND PARTICLES -->
+
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+
+
+<!-- FLOATING E-COMMERCE GRAPHICS -->
+
+<div class="floating-icon icon-one">📦</div>
+<div class="floating-icon icon-two">🛒</div>
+<div class="floating-icon icon-three">💳</div>
+<div class="floating-icon icon-four">🚚</div>
+<div class="floating-icon icon-five">📊</div>
+<div class="floating-icon icon-six">🏷️</div>
+
+
+<!-- WELCOME CARD -->
+
+<div class="welcome-card">
+
+
+    <div class="sparkle sparkle-one">
+        ✨
+    </div>
+
+    <div class="sparkle sparkle-two">
+        ✨
+    </div>
+
+    <div class="sparkle sparkle-three">
+        ⭐
+    </div>
+
+    <div class="sparkle sparkle-four">
+        ✨
+    </div>
+
+
+    <div class="logo-wrapper">
+
+        <div class="logo">
+            🛒
+        </div>
+
+    </div>
+
+
+    <h1>
+        Welcome to <span>CartNexa</span>
+    </h1>
+
+
+    <p class="subtitle">
+        Inventory Management System
+    </p>
+
+
+    <div class="features">
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📦
+            </div>
+
+            <span>
+                Inventory
+            </span>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🛍️
+            </div>
+
+            <span>
+                Shopping
+            </span>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <span>
+                Analytics
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="loading-text">
+        Preparing your CartNexa experience...
+    </div>
+
+
+    <div class="loading">
+
+        <div class="loading-bar"></div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    /*
+       Keep the welcome screen for exactly 6 seconds.
+       Then open the USER LOGIN.
+    */
+
+    setTimeout(function () {
+
+        window.location.href =
+            "/login?type=user";
+
+    }, 6000);
+
+</script>
+
+
+</body>
+
+</html>

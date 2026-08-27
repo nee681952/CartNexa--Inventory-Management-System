@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice - Inventary</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>🛒 CartNexa</h1>
+        <h2>Sales Invoice</h2>
+
+        <hr>
+
+        <p><strong>Invoice No:</strong> #{{ sale[0] }}</p>
+        <p><strong>Date:</strong> {{ sale[5] }}</p>
+
+        <p><strong>Customer:</strong> {{ sale[1] }}</p>
+
+        <hr>
+
+        <p><strong>Product:</strong> {{ sale[2] }}</p>
+        <p><strong>Quantity:</strong> {{ sale[3] }}</p>
+        <p><strong>Total:</strong> ₹{{ sale[4] }}</p>
+
+        <hr>
+
+        <h2>Thank You!</h2>
+
+        <button onclick="window.print()">Print Invoice</button>
+
+        <br><br>
+
+        <a href="/sales">← Back to Sales</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

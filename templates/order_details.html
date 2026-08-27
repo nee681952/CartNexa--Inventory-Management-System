@@ -1,0 +1,468 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Order #{{ order[0] }} - CartNexa</title>
+
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="order-details-page">
+    <!-- =========================================
+     NAVBAR
+========================================= -->
+
+    <nav class="navbar order-details-navbar">
+      <div class="order-brand">🛒 CartNexa</div>
+
+      <div class="order-nav-links">
+        <a href="/user-dashboard"> 🏠 Dashboard </a>
+
+        <a href="/user-products"> 🛍️ Products </a>
+
+        <a href="/wishlist"> ❤️ Wishlist </a>
+
+        <a href="/my-orders"> 📦 My Orders </a>
+
+        <a href="/logout"> Logout </a>
+      </div>
+    </nav>
+
+    <!-- =========================================
+     FLOATING BACKGROUND GRAPHICS
+========================================= -->
+
+    <div class="order-floating order-float-1">📦</div>
+
+    <div class="order-floating order-float-2">🛒</div>
+
+    <div class="order-floating order-float-3">✨</div>
+
+    <div class="order-floating order-float-4">💳</div>
+
+    <div class="order-floating order-float-5">🚚</div>
+
+    <div class="order-bubble order-bubble-1"></div>
+    <div class="order-bubble order-bubble-2"></div>
+    <div class="order-bubble order-bubble-3"></div>
+    <div class="order-bubble order-bubble-4"></div>
+    <div class="order-bubble order-bubble-5"></div>
+    <div class="order-bubble order-bubble-6"></div>
+
+    <!-- =========================================
+     MAIN CONTAINER
+========================================= -->
+
+    <div class="order-details-container">
+      <!-- =====================================
+         HEADER
+    ====================================== -->
+
+      <div class="order-page-header">
+        <a href="/my-orders" class="order-back-link"> ← Back to My Orders </a>
+
+        <div class="order-header-main">
+          <div class="order-header-icon">📦</div>
+
+          <div>
+            <span class="order-header-label"> CARTNEXA ORDER </span>
+
+            <h1>Order Details</h1>
+
+            <p>Order #{{ order[0] }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================
+         ORDER STATUS
+    ====================================== -->
+
+      <div
+        class="order-status-card {% if order[7] == 'Delivered' %} status-delivered {% elif order[7] == 'Shipped' %} status-shipped {% elif order[7] == 'Confirmed' %} status-confirmed {% else %} status-pending {% endif %}"
+      >
+        <div class="status-icon">
+          {% if order[7] == "Delivered" %} ✓ {% elif order[7] == "Shipped" %} 🚚
+          {% elif order[7] == "Confirmed" %} ✓ {% else %} ⏳ {% endif %}
+        </div>
+
+        <div class="status-content">
+          <span class="status-small-title"> CURRENT ORDER STATUS </span>
+
+          <h2>Order {{ order[7] }}</h2>
+
+          <p>
+            {% if order[7] == "Delivered" %} Your order has been successfully
+            delivered. {% elif order[7] == "Shipped" %} Your order is on its way
+            to you. {% elif order[7] == "Confirmed" %} Your order has been
+            confirmed and is being prepared. {% else %} Your order has been
+            received and is waiting for confirmation. {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <!-- =====================================
+         ORDER TRACKING
+    ====================================== -->
+
+      <div class="order-progress-card order-tracking-card">
+        <div class="progress-title">
+          <div class="tracking-title-icon">🚚</div>
+
+          <div>
+            <strong> Order Tracking </strong>
+
+            <span> Follow your order journey </span>
+          </div>
+        </div>
+
+        <div class="tracking-timeline">
+          <!-- ORDER PLACED -->
+
+          <div class="tracking-item completed">
+            <div class="tracking-marker">✓</div>
+
+            <div class="tracking-content">
+              <strong> Order Placed </strong>
+
+              <span> Your order has been successfully placed. </span>
+
+              <small> {{ order[5] }} </small>
+            </div>
+          </div>
+
+          <!-- CONFIRMED -->
+
+          <div
+            class="tracking-item {% if order[7] in ['Confirmed', 'Shipped', 'Delivered'] %} completed {% elif order[7] == 'Pending' %} current {% endif %}"
+          >
+            <div class="tracking-marker">
+              {% if order[7] in ['Confirmed', 'Shipped', 'Delivered'] %} ✓ {%
+              else %} 2 {% endif %}
+            </div>
+
+            <div class="tracking-content">
+              <strong> Order Confirmed </strong>
+
+              <span>
+                {% if order[7] in ['Confirmed', 'Shipped', 'Delivered'] %} Your
+                order has been confirmed and is being prepared. {% else %}
+                Waiting for order confirmation. {% endif %}
+              </span>
+            </div>
+          </div>
+
+          <!-- SHIPPED -->
+
+          <div
+            class="tracking-item {% if order[7] in ['Shipped', 'Delivered'] %} completed {% elif order[7] == 'Confirmed' %} current {% endif %}"
+          >
+            <div class="tracking-marker">
+              {% if order[7] in ['Shipped', 'Delivered'] %} ✓ {% else %} 🚚 {%
+              endif %}
+            </div>
+
+            <div class="tracking-content">
+              <strong> Shipped </strong>
+
+              <span>
+                {% if order[7] in ['Shipped', 'Delivered'] %} Your package is on
+                its way. {% else %} Your package will be shipped soon. {% endif
+                %}
+              </span>
+            </div>
+          </div>
+
+          <!-- OUT FOR DELIVERY -->
+
+          <div
+            class="tracking-item {% if order[7] == 'Delivered' %} completed {% elif order[7] == 'Shipped' %} current {% endif %}"
+          >
+            <div class="tracking-marker">
+              {% if order[7] == 'Delivered' %} ✓ {% else %} 📍 {% endif %}
+            </div>
+
+            <div class="tracking-content">
+              <strong> Out for Delivery </strong>
+
+              <span>
+                {% if order[7] == 'Delivered' %} Your order was out for delivery
+                before being delivered. {% elif order[7] == 'Shipped' %} Your
+                package will be delivered soon. {% else %} Delivery will begin
+                after shipment. {% endif %}
+              </span>
+            </div>
+          </div>
+
+          <!-- DELIVERED -->
+
+          <div
+            class="tracking-item {% if order[7] == 'Delivered' %} completed {% endif %}"
+          >
+            <div class="tracking-marker">
+              {% if order[7] == 'Delivered' %} ✓ {% else %} 📦 {% endif %}
+            </div>
+
+            <div class="tracking-content">
+              <strong> Delivered </strong>
+
+              <span>
+                {% if order[7] == 'Delivered' %} Your order has been
+                successfully delivered. {% else %} Your order will appear here
+                once delivered. {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================
+         INFORMATION GRID
+    ====================================== -->
+
+      <div class="order-details-grid">
+        <!-- =================================
+             PRODUCT INFORMATION
+        ================================== -->
+
+        <div class="order-info-card">
+          <div class="order-card-title">
+            <div class="card-title-icon product-icon">🛍️</div>
+
+            <div>
+              <h2>Product Information</h2>
+
+              <p>Your purchased item</p>
+            </div>
+          </div>
+
+          <div class="order-product-image-box">
+            {% if order[17] %}
+
+            <img
+              src="{{ url_for('static', filename='product_images/' + order[17]) }}"
+              alt="{{ order[1] }}"
+              class="order-details-product-image"
+            />
+
+            {% else %}
+
+            <div class="order-no-image">🛍️</div>
+
+            {% endif %}
+          </div>
+
+          <div class="order-info-row">
+            <span> Product </span>
+
+            <strong> {{ order[1] }} </strong>
+          </div>
+
+          <div class="order-info-row">
+            <span> Quantity </span>
+
+            <strong> {{ order[2] }} </strong>
+          </div>
+
+          <div class="order-info-row">
+            <span> Price </span>
+
+            <strong> ₹{{ "%.2f"|format(order[3]|float) }} </strong>
+          </div>
+
+          <div class="order-info-row total-row">
+            <span> Total Amount </span>
+
+            <strong> ₹{{ "%.2f"|format(order[4]|float) }} </strong>
+          </div>
+
+          <div class="order-info-row">
+            <span> Order Date </span>
+
+            <strong> {{ order[5] }} </strong>
+          </div>
+        </div>
+
+        <!-- =================================
+             CUSTOMER INFORMATION
+        ================================== -->
+
+        <div class="order-info-card">
+          <div class="order-card-title">
+            <div class="card-title-icon customer-icon">👤</div>
+
+            <div>
+              <h2>Customer Information</h2>
+
+              <p>Order customer details</p>
+            </div>
+          </div>
+
+          <div class="order-info-row">
+            <span> Username </span>
+
+            <strong> {{ order[6] }} </strong>
+          </div>
+
+          <div class="order-info-row">
+            <span> Name </span>
+
+            <strong> {{ order[8] }} </strong>
+          </div>
+
+          <div class="order-info-row">
+            <span> Payment Method </span>
+
+            <strong> {{ order[16] }} </strong>
+          </div>
+        </div>
+
+        <!-- =================================
+             DELIVERY ADDRESS
+        ================================== -->
+
+        <div class="order-info-card address-card">
+          <div class="order-card-title">
+            <div class="card-title-icon address-icon">📍</div>
+
+            <div>
+              <h2>Delivery Address</h2>
+
+              <p>Where your order will be delivered</p>
+            </div>
+          </div>
+
+          <div class="address-content">
+            <div class="address-name">{{ order[8] }}</div>
+
+            <p>{{ order[9] }}</p>
+
+            {% if order[10] %}
+
+            <p>{{ order[10] }}</p>
+
+            {% endif %}
+
+            <p>
+              🏙️ <strong>City:</strong>
+              {{ order[11] }}
+            </p>
+
+            <p>
+              📍 <strong>State:</strong>
+              {{ order[12] }}
+            </p>
+
+            <p>
+              🌎 <strong>Country:</strong>
+              {{ order[13] }}
+            </p>
+
+            {% if order[15] %}
+
+            <p>
+              <strong> 📍 Landmark: </strong>
+
+              {{ order[15] }}
+            </p>
+
+            {% endif %}
+
+            <p>
+              <strong> 📮 Pincode: </strong>
+
+              {{ order[14] }}
+            </p>
+          </div>
+        </div>
+
+        <!-- =================================
+             PAYMENT INFORMATION
+        ================================== -->
+
+        <div class="order-info-card payment-card-details">
+          <div class="order-card-title">
+            <div class="card-title-icon payment-icon">💳</div>
+
+            <div>
+              <h2>Payment Information</h2>
+
+              <p>Your selected payment method</p>
+            </div>
+          </div>
+
+          <div class="payment-method-display">
+            {% if order[16] == "Cash on Delivery" %}
+
+            <span class="big-payment-icon"> 💵 </span>
+
+            {% elif order[16] == "UPI" %}
+
+            <span class="big-payment-icon"> 📱 </span>
+
+            {% elif order[16] == "Debit Card" %}
+
+            <span class="big-payment-icon"> 💳 </span>
+
+            {% elif order[16] == "Credit Card" %}
+
+            <span class="big-payment-icon"> 💳 </span>
+
+            {% else %}
+
+            <span class="big-payment-icon"> 🏦 </span>
+
+            {% endif %}
+
+            <div>
+              <strong> {{ order[16] }} </strong>
+
+              <p>Selected payment method</p>
+            </div>
+          </div>
+
+          <div class="payment-total">
+            <span> 
+                {% if order[7] == "Delivered" %}
+                    Amount Paid
+                {% else %}
+                    Amount to Pay
+                {% endif %} 
+            </span>
+
+            <strong> ₹{{ "%.2f"|format(order[4]|float) }} </strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================
+         SECURITY MESSAGE
+    ====================================== -->
+
+      <div class="order-security-box">
+        <div class="security-icon">🔒</div>
+
+        <div>
+          <strong> Safe & Secure Order </strong>
+
+          <p>Your CartNexa order information is securely stored.</p>
+        </div>
+
+        <div class="security-check">✓</div>
+      </div>
+
+      <!-- =====================================
+         ACTIONS
+    ====================================== -->
+
+      <div class="order-actions">
+        <a href="/my-orders" class="order-action secondary">
+          ← Back to My Orders
+        </a>
+
+        <a href="/user-products" class="order-action primary">
+          🛍️ Continue Shopping
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Orders - CartNexa</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="admin-orders-page">
+
+<nav class="navbar products-navbar">
+
+    <div class="products-brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+    </div>
+
+    <div class="products-nav-links">
+
+        <a href="/dashboard">
+            🏠 Dashboard
+        </a>
+
+        <a href="/products">
+            🛍️ Products
+        </a>
+
+        <a href="/sales">
+            💰 Sales
+        </a>
+
+        <a href="/purchases">
+            🛒 Purchases
+        </a>
+
+        <a href="/suppliers">
+            🚚 Suppliers
+        </a>
+
+        <a href="/reports">
+            📊 Reports
+        </a>
+
+        <a href="/admin/orders">
+            📦 Orders
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <div class="admin-orders-header">
+
+    <div>
+
+        <span class="admin-orders-label">
+            CARTNEXA ORDER MANAGEMENT
+        </span>
+
+        <h1>
+            Customer Orders 📦
+        </h1>
+
+        <p>
+            Manage customer orders and update their status.
+        </p>
+
+    </div>
+
+    <div class="admin-orders-header-icon">
+        🛒
+    </div>
+
+</div>
+
+    <table class="admin-orders-table">
+
+    <thead>
+
+        <tr>
+            <th>🆔 Order ID</th>
+            <th>👤 Customer</th>
+            <th>📦 Product</th>
+            <th>🔢 Quantity</th>
+            <th>💰 Price</th>
+            <th>💵 Total</th>
+            <th>📅 Date</th>
+            <th>⚡ Status</th>
+            <th>Update</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for order in orders %}
+
+        <tr>
+
+            <td>
+                <span class="order-id-badge">
+                    #{{ order[0] }}
+                </span>
+            </td>
+
+            <td>
+                <strong>
+                    {{ order[1] }}
+                </strong>
+            </td>
+
+            <td>
+                {{ order[2] }}
+            </td>
+
+            <td>
+                <span class="order-quantity-badge">
+                    {{ order[3] }}
+                </span>
+            </td>
+
+            <td>
+                ₹{{ "%.2f"|format(order[4]|float) }}
+            </td>
+
+            <td>
+                <strong class="order-total-amount">
+                    ₹{{ "%.2f"|format(order[5]|float) }}
+                </strong>
+            </td>
+
+            <td>
+                <span class="order-date">
+                    {{ order[6] }}
+                </span>
+            </td>
+
+            <td>
+
+                {% if order[7] == "Pending" %}
+
+                    <span class="order-status pending">
+                        ● Pending
+                    </span>
+
+                {% elif order[7] == "Confirmed" %}
+
+                    <span class="order-status confirmed">
+                        ● Confirmed
+                    </span>
+
+                {% elif order[7] == "Shipped" %}
+
+                    <span class="order-status shipped">
+                        ● Shipped
+                    </span>
+
+                {% elif order[7] == "Delivered" %}
+
+                    <span class="order-status delivered">
+                        ● Delivered
+                    </span>
+
+                {% else %}
+
+                    <span class="order-status">
+                        ● {{ order[7] }}
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                <form
+                    action="/admin/update-order-status/{{ order[0] }}"
+                    method="POST"
+                    class="order-update-form"
+                >
+
+                    <select name="status">
+
+                        <option value="Pending"
+                            {% if order[7] == "Pending" %}selected{% endif %}>
+                            Pending
+                        </option>
+
+                        <option value="Confirmed"
+                            {% if order[7] == "Confirmed" %}selected{% endif %}>
+                            Confirmed
+                        </option>
+
+                        <option value="Shipped"
+                            {% if order[7] == "Shipped" %}selected{% endif %}>
+                            Shipped
+                        </option>
+
+                        <option value="Delivered"
+                            {% if order[7] == "Delivered" %}selected{% endif %}>
+                            Delivered
+                        </option>
+
+                    </select>
+
+                    <button type="submit">
+                        Update
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+<!-- ADMIN BACKGROUND GRAPHICS -->
+
+<div class="admin-floating admin-float-one">
+    📦
+</div>
+
+<div class="admin-floating admin-float-two">
+    🛒
+</div>
+
+<div class="admin-floating admin-float-three">
+    💳
+</div>
+
+<div class="admin-floating admin-float-four">
+    ✨
+</div>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CartNexa - User Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="user-home-page">
+    <!-- NAVBAR -->
+
+    <nav class="navbar user-navbar">
+      <div class="brand">
+        🛒
+        <span class="brand-cart">Cart</span><span class="brand-nexa">Nexa</span>
+      </div>
+
+      <div class="user-nav-links">
+        <a href="/user-dashboard">🏠 Home</a>
+        <a href="/user-products">🛍️ Products</a>
+        <a href="/wishlist">❤️ Wishlist</a>
+        <a href="/my-orders">📦 My Orders</a>
+        <a href="/logout">Logout</a>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+
+    <section class="user-hero">
+      <div class="hero-content">
+        <p class="hero-small">WELCOME TO CARTNEXA</p>
+
+        <h1>Hello, {{ username }} 👋</h1>
+
+        <h2>Discover products you'll love.</h2>
+
+        <p>
+          Browse our products, find what you need and place your order easily
+          with CartNexa.
+        </p>
+
+        <a href="/user-products" class="hero-btn"> 🛍️ Start Shopping </a>
+      </div>
+
+      <div class="hero-graphic">🛒</div>
+    </section>
+
+    <!-- QUICK STATS -->
+
+    <div class="user-stats">
+      <div class="user-stat-card">
+        <div class="stat-icon">🛍️</div>
+
+        <div>
+          <p>Available Products</p>
+          <h2>{{ total_products }}</h2>
+        </div>
+      </div>
+
+      <div class="user-stat-card">
+        <div class="stat-icon">📦</div>
+
+        <div>
+          <p>Products In Stock</p>
+          <h2>{{ in_stock }}</h2>
+        </div>
+      </div>
+
+      <div
+        class="user-stat-card clickable-card"
+        onclick="window.location.href = '/my-orders'"
+      >
+        <div class="stat-icon">🚚</div>
+
+        <div>
+          <p>My Orders</p>
+          <h2>View</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOPPING FEATURES -->
+
+    <section class="shopping-features">
+      <div class="feature-box">
+        <div class="feature-icon">🚚</div>
+
+        <h3>Easy Ordering</h3>
+
+        <p>Order your favourite products in just a few clicks.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">🔒</div>
+
+        <h3>Secure Checkout</h3>
+
+        <p>Safe and simple checkout experience.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">💳</div>
+
+        <h3>Multiple Payments</h3>
+
+        <p>Choose from multiple payment options.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">📦</div>
+
+        <h3>Track Orders</h3>
+
+        <p>Easily check your order status.</p>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+
+    <section class="user-products-section">
+      <!-- POPULAR PRODUCTS HEADER -->
+
+      <div class="section-heading">
+        <div>
+          <p class="section-label">SHOP NOW</p>
+
+          <h2>Popular Products</h2>
+
+          <p>Explore products currently available at CartNexa.</p>
+        </div>
+
+        <a href="/user-products" class="view-all-btn"> View All → </a>
+      </div>
+
+      <!-- WHY SHOP WITH CARTNEXA -->
+
+      <section class="why-cartnexa">
+        <div class="why-cartnexa-header">
+          <span> WHY CARTNEXA? </span>
+
+          <h2>Everything You Need, All in One Place</h2>
+
+          <p>
+            Enjoy a simple, secure and convenient shopping experience with
+            CartNexa.
+          </p>
+        </div>
+
+        <div class="why-cartnexa-cards">
+          <div class="why-card">
+            <div class="why-icon">🛍️</div>
+
+            <h3>Wide Selection</h3>
+
+            <p>Explore a variety of products available in one place.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">🚚</div>
+
+            <h3>Fast Delivery</h3>
+
+            <p>Get your orders delivered conveniently to your doorstep.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">🔒</div>
+
+            <h3>Secure Shopping</h3>
+
+            <p>Your order and customer information are handled securely.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">💳</div>
+
+            <h3>Easy Payment</h3>
+
+            <p>Choose a payment method that works best for you.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHOPPING JOURNEY ANIMATION -->
+
+      <section class="shopping-journey">
+        <div class="journey-title">
+          <span>YOUR SHOPPING JOURNEY</span>
+          <h2>From Browsing to Delivery</h2>
+          <p>Everything is simple with CartNexa.</p>
+        </div>
+
+        <div class="journey-track">
+          <div class="journey-step">
+            <div class="journey-icon">🔍</div>
+            <h3>Discover</h3>
+            <p>Find products you love.</p>
+          </div>
+
+          <div class="journey-line">
+            <div class="moving-cart">🛒</div>
+          </div>
+
+          <div class="journey-step">
+            <div class="journey-icon">🛍️</div>
+            <h3>Choose</h3>
+            <p>Select what you need.</p>
+          </div>
+
+          <div class="journey-line">
+            <div class="moving-cart">🛒</div>
+          </div>
+
+          <div class="journey-step">
+            <div class="journey-icon">💳</div>
+            <h3>Checkout</h3>
+            <p>Complete your order easily.</p>
+          </div>
+
+          <div class="journey-line">
+            <div class="moving-cart">🛒</div>
+          </div>
+
+          <div class="journey-step">
+            <div class="journey-icon">📦</div>
+            <h3>Delivered</h3>
+            <p>Receive it at your doorstep.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHOPPING HIGHLIGHTS -->
+
+      <section class="shopping-highlights">
+        <div class="highlight-content">
+          <span class="highlight-label">SHOP SMART</span>
+
+          <h2>Make Every Purchase Worth It</h2>
+
+          <p>
+            Discover quality products, compare your choices and enjoy a smooth
+            shopping experience with CartNexa.
+          </p>
+
+          <a href="/user-products" class="highlight-btn">
+            Explore Products →
+          </a>
+        </div>
+
+        <div class="highlight-items">
+          <div class="highlight-item">
+            <div class="highlight-number">01</div>
+            <div>
+              <h3>Discover</h3>
+              <p>Browse products that match your needs.</p>
+            </div>
+          </div>
+
+          <div class="highlight-item">
+            <div class="highlight-number">02</div>
+            <div>
+              <h3>Choose</h3>
+              <p>Select the right product at the right price.</p>
+            </div>
+          </div>
+
+          <div class="highlight-item">
+            <div class="highlight-number">03</div>
+            <div>
+              <h3>Enjoy</h3>
+              <p>Place your order and wait for delivery.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXISTING PRODUCT GRID -->
+
+      <div class="user-product-grid">
+        {% for product in products %}
+
+        <div class="user-product-card">
+          <div class="product-image-box">
+            {% if product[3] > 0 %}
+
+            <span class="available-badge"> Available </span>
+
+            {% else %}
+
+            <span class="soldout-badge"> Out of Stock </span>
+
+            {% endif %}
+
+            <div class="product-placeholder">🛍️</div>
+          </div>
+
+          <div class="product-card-content">
+            <p class="product-category">{{ product[1] }}</p>
+
+            <h3>{{ product[0] }}</h3>
+
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+
+            <div class="product-bottom">
+              <strong> ₹{{ "%.2f"|format(product[2]|float) }} </strong>
+
+              {% if product[3] > 0 %}
+
+              <a href="/user-products" class="shop-btn"> View </a>
+
+              {% else %}
+
+              <span class="disabled-btn"> Unavailable </span>
+
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- SHOPPING BENEFITS -->
+
+    <section class="shopping-benefits">
+      <div class="benefit-item">
+        <div class="benefit-icon">🏆</div>
+        <div>
+          <h3>Top Quality Assured</h3>
+          <p>
+            We carefully select products to give you the quality you deserve.
+          </p>
+        </div>
+      </div>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">🏷️</div>
+        <div>
+          <h3>Best Prices</h3>
+          <p>Get great value with competitive prices on our products.</p>
+        </div>
+      </div>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">📦</div>
+        <div>
+          <h3>Reliable Delivery</h3>
+          <p>
+            Get your orders delivered safely and conveniently to your doorstep.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM CTA -->
+
+    <section class="shopping-cta">
+      <div>
+        <h2>Ready to start shopping? 🛍️</h2>
+
+        <p>Find something you love and place your order today.</p>
+      </div>
+
+      <a href="/user-products"> Explore Products → </a>
+    </section>
+
+    <script>
+      /* Small animation when cards enter the screen */
+
+      const cards = document.querySelectorAll(
+        ".user-product-card, .feature-box, .user-stat-card",
+      );
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show-card");
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+        },
+      );
+
+      cards.forEach((card) => {
+        observer.observe(card);
+      });
+    </script>
+  </body>
+</html>
