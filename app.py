@@ -7,15 +7,15 @@ import os
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = "inventory_secret_key"
+app.secret_key = os.getenv("SECRET_KEY", "inventory_secret_key")
 
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="Neeraj@123",
-    database="inventory_db"
+    host=os.getenv("DB_HOST", "localhost"),
+    user=os.getenv("DB_USER", "root"),
+    password=os.getenv("DB_PASSWORD", " "),
+    database=os.getenv("DB_NAME", "inventory_db"),
+    port=int(os.getenv("DB_PORT", "3306"))
 )
-
     
 
 @app.route("/search")
