@@ -42,6 +42,53 @@
     </nav>
 
     <div class="container">
+      <!-- ADMIN NOTIFICATIONS -->
+
+      <div class="admin-notifications-section">
+        <div class="admin-notifications-header">
+          <div>
+            <span class="admin-notifications-label"
+              >🔔 ADMIN NOTIFICATIONS</span
+            >
+            <h2>Notifications</h2>
+            <p>Recent customer and system activity</p>
+          </div>
+
+          <div class="admin-notification-count">
+            {{ admin_notifications|length }}
+          </div>
+        </div>
+
+        {% if admin_notifications %}
+
+        <div class="admin-notifications-list">
+          {% for notification in admin_notifications %}
+
+          <div class="admin-notification-card">
+            <div class="admin-notification-icon">👤</div>
+
+            <div class="admin-notification-content">
+              <strong>{{ notification[1] }}</strong>
+
+              <span> 📅 {{ notification[2] }} </span>
+            </div>
+
+            <div class="admin-notification-new">NEW</div>
+          </div>
+
+          {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="no-notifications">
+          <span>🔔</span>
+          <h3>No New Notifications</h3>
+          <p>There are no new customer notifications.</p>
+        </div>
+
+        {% endif %}
+      </div>
       <div class="admin-dashboard-header">
         <div class="admin-header-content">
           <span class="admin-header-label"> CARTNEXA ADMIN PANEL </span>
@@ -113,6 +160,52 @@
             <span> Currently unavailable </span>
           </div>
         </div>
+      </div>
+
+      <!-- ADMIN NOTIFICATIONS -->
+
+      <div class="admin-notifications-section">
+        <div class="admin-notifications-header">
+          <h2>🔔 New Customer Notifications</h2>
+
+          {% if admin_notifications %}
+          <span class="notification-count">
+            {{ admin_notifications|length }} notification{% if
+            admin_notifications|length != 1 %}s{% endif %}
+          </span>
+          {% endif %}
+        </div>
+
+        {% if admin_notifications %}
+
+        <div class="admin-notifications-list">
+          {% for notification in admin_notifications %}
+
+          <div
+            class="admin-notification {% if notification[3] == 0 %}unread-notification{% endif %}"
+          >
+            <div class="notification-icon">👤</div>
+
+            <div class="notification-content">
+              <strong>New Customer</strong>
+
+              <p>{{ notification[1] }}</p>
+
+              <span class="notification-time"> 📅 {{ notification[2] }} </span>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="no-notifications">
+          <span>🔔</span>
+          <p>No new customer notifications.</p>
+        </div>
+
+        {% endif %}
       </div>
 
       <h2>Recent Sales</h2>

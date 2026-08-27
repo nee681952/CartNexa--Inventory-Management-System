@@ -403,6 +403,15 @@ def dashboard():
 
     low_stock_products = cursor.fetchall()
 
+        # Get unread admin notifications
+    cursor.execute("""
+        SELECT id, message, created_at
+        FROM admin_notifications
+        WHERE is_read = 0
+        ORDER BY created_at DESC
+    """)
+    admin_notifications = cursor.fetchall()
+
     cursor.close()
 
     return render_template(
@@ -412,7 +421,8 @@ def dashboard():
     out_of_stock=out_of_stock,
     total_sales=total_sales,
     recent_sales=recent_sales,
-    low_stock_products=low_stock_products
+    low_stock_products=low_stock_products,
+    admin_notifications=admin_notifications
 )
 
 
@@ -2017,13 +2027,22 @@ def register():
             cursor.close()
             return "Username already exists"
 
-        # Create new user
+                # Create new user
         cursor.execute(
             """
             INSERT INTO users (username, password)
             VALUES (%s, %s)
             """,
             (username, password)
+        )
+
+        # Create notification for admin
+        cursor.execute(
+            """
+            INSERT INTO admin_notifications (message)
+            VALUES (%s)
+            """,
+            (f"New customer '{username}' has joined CartNexa.",)
         )
 
         db.commit()

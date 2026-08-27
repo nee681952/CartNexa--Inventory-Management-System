@@ -19768,3 +19768,591 @@ body.modal-open {
     width: 220px;
   }
 }
+
+/* =========================================
+   ADMIN CUSTOMER NOTIFICATIONS
+   ========================================= */
+
+.admin-notifications-section {
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
+
+.admin-notifications-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.admin-notifications-header h2 {
+  margin: 0;
+}
+
+.notification-count {
+  background: #e8f0ff;
+  color: #2563eb;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-notification {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.unread-notification {
+  border-left: 5px solid #2563eb;
+}
+
+.notification-icon {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef4ff;
+  border-radius: 50%;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-content strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.notification-content p {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #777;
+}
+
+.no-notifications {
+  padding: 30px;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  color: #777;
+}
+
+.no-notifications span {
+  display: block;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.no-notifications p {
+  margin: 0;
+}
+
+/* =========================================
+   NEW CUSTOMER NOTIFICATION ANIMATION
+   ========================================= */
+
+.admin-notifications-section {
+    animation: notificationSectionIn 0.8s ease-out both;
+}
+
+@keyframes notificationSectionIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Notification cards */
+
+.admin-notification-card {
+    animation: notificationCardIn 0.7s ease-out both;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+@keyframes notificationCardIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* Hover effect */
+
+.admin-notification-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+/* Notification icon animation */
+
+.admin-notification-icon {
+    animation: notificationIconPop 0.8s ease-out 0.3s both;
+}
+
+@keyframes notificationIconPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* NEW badge */
+
+.admin-notification-new {
+    animation: newBadgePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes newBadgePulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 0.75;
+    }
+}
+
+
+/* Notification count */
+
+.admin-notification-count {
+    animation: notificationCountPop 0.7s ease-out 0.4s both;
+}
+
+@keyframes notificationCountPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================================================
+   CARTNEXA - NEW CUSTOMER NOTIFICATION DESIGN
+   ========================================================= */
+
+.admin-notifications-section {
+    position: relative;
+    overflow: hidden;
+    margin: 35px 0;
+    padding: 28px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #f8fbff, #ffffff);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+
+    /* Strong entrance animation */
+    animation: notificationSectionEnter 1s ease-out both;
+}
+
+/* Decorative background graphics */
+
+.admin-notifications-section::before {
+    content: "🔔";
+    position: absolute;
+    right: 45px;
+    top: 15px;
+    font-size: 90px;
+    opacity: 0.06;
+    transform: rotate(15deg);
+    animation: notificationBackgroundFloat 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.admin-notifications-section::after {
+    content: "👤";
+    position: absolute;
+    right: 150px;
+    bottom: 10px;
+    font-size: 65px;
+    opacity: 0.05;
+    animation: notificationBackgroundFloat 5s ease-in-out infinite reverse;
+    pointer-events: none;
+}
+
+
+/* Section entrance */
+
+@keyframes notificationSectionEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(45px) scale(0.96);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.01);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* Background graphics floating */
+
+@keyframes notificationBackgroundFloat {
+    0% {
+        transform: translateY(0) rotate(15deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotate(22deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(15deg);
+    }
+}
+
+
+/* =========================================================
+   NOTIFICATION HEADER
+   ========================================================= */
+
+.admin-notifications-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.admin-notifications-label {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    animation: labelFade 1.2s ease-out both;
+}
+
+@keyframes labelFade {
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* =========================================================
+   NOTIFICATION COUNT
+   ========================================================= */
+
+.admin-notification-count {
+    position: relative;
+    z-index: 3;
+    min-width: 40px;
+    padding: 9px 16px;
+    text-align: center;
+    border-radius: 30px;
+    background: #eaf2ff;
+    color: #2563eb;
+    font-weight: 700;
+
+    animation: countPop 0.8s cubic-bezier(.17,.67,.35,1.4) both;
+}
+
+@keyframes countPop {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
+   NOTIFICATION CARD
+   ========================================================= */
+
+.admin-notification-card {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 22px;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+    animation: notificationCardEnter 1s ease-out 0.25s both;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+@keyframes notificationCardEnter {
+    0% {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateX(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* Hover */
+
+.admin-notification-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(37, 99, 235, 0.14);
+    border-color: rgba(37, 99, 235, 0.25);
+}
+
+
+/* =========================================================
+   USER ICON
+   ========================================================= */
+
+.admin-notification-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eef4ff;
+    font-size: 24px;
+
+    animation: userIconBounce 1s ease-out 0.5s both;
+}
+
+@keyframes userIconBounce {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-30deg);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.2) rotate(10deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+
+/* =========================================================
+   NOTIFICATION CONTENT
+   ========================================================= */
+
+.admin-notification-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    animation: contentSlide 0.8s ease-out 0.5s both;
+}
+
+@keyframes contentSlide {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.admin-notification-content strong {
+    font-size: 16px;
+}
+
+.admin-notification-content span {
+    font-size: 13px;
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   NEW BADGE
+   ========================================================= */
+
+.admin-notification-new {
+    position: relative;
+    flex-shrink: 0;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    background: #eaf2ff;
+    color: #2563eb;
+
+    animation: newBadgeAttention 2s ease-in-out infinite;
+}
+
+@keyframes newBadgeAttention {
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    }
+
+    50% {
+        transform: scale(1.12);
+        box-shadow: 0 0 0 7px rgba(37, 99, 235, 0.08);
+    }
+}
+
+
+/* =========================================================
+   BELL ANIMATION
+   ========================================================= */
+
+.admin-notifications-label:first-letter {
+    display: inline-block;
+    animation: bellRing 1.5s ease-in-out infinite;
+}
+
+@keyframes bellRing {
+    0%,
+    100% {
+        transform: rotate(0);
+    }
+
+    10% {
+        transform: rotate(15deg);
+    }
+
+    20% {
+        transform: rotate(-15deg);
+    }
+
+    30% {
+        transform: rotate(10deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .admin-notifications-section {
+        margin: 25px 10px;
+        padding: 20px;
+    }
+
+    .admin-notification-card {
+        align-items: flex-start;
+    }
+
+    .admin-notification-new {
+        display: none;
+    }
+
+    .admin-notifications-section::before {
+        right: 10px;
+        font-size: 65px;
+    }
+
+    .admin-notifications-section::after {
+        right: 80px;
+        font-size: 45px;
+    }
+}
