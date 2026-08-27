@@ -260,3 +260,164 @@ Administrators can:
                     │     MySQL Database   │
                     │       defaultdb      │
                     └──────────────────────┘
+```
+# 🗄️ Database Structure
+
+CartNexa uses MySQL for storing application information.
+
+The database contains the following tables:
+
+```text
+admins
+categories
+products
+product_reviews
+purchases
+review_helpful
+sales
+suppliers
+user_orders
+users
+wishlist
+
+```
+🔑 Environment Variables
+
+The application uses environment variables for database configuration.
+
+```text
+DB_HOST=your_database_host
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_NAME=your_database_name
+DB_PORT=your_database_port
+SECRET_KEY=your_secret_key
+```
+💻 Local Installation
+
+1. Clone the Repository
+```text
+git clone https://github.com/nee681952/CartNexa--Inventory-Management-System.git
+```
+2. Open the Project
+```text
+cd CartNexa--Inventory-Management-System
+```
+3. Create a Virtual Environment
+
+Windows:
+```text
+python -m venv venv
+```
+Activate it:
+```text
+venv\Scripts\activate
+```
+4. Install Dependencies
+```text
+pip install -r requirements.txt
+```
+5. Configure MySQL
+
+Create a MySQL database and configure the following environment variables:
+```text
+DB_HOST
+DB_USER
+DB_PASSWORD
+DB_NAME
+DB_PORT
+```
+6. Import the Database
+
+The repository contains:
+```text
+inventory_db.sql
+```
+Import this SQL file into your MySQL database using MySQL Workbench or another MySQL client.
+
+7. Run the Application
+```text
+python app.py
+```
+The application will normally run at:
+```text
+http://localhost:5000
+```
+🚀 Deployment
+
+CartNexa is deployed using:
+
+Application Hosting
+
+Render
+
+Database Hosting
+
+Aiven MySQL
+
+The Flask application uses environment variables to securely connect to the hosted MySQL database.
+
+🔒 Security Considerations
+
+The project includes several basic security practices:
+
+Session-based authentication
+Login validation
+Registration validation
+Password confirmation
+Password strength validation
+Access control for admin pages
+Access control for user pages
+Input validation
+Environment variables for database credentials
+
+📌 Future Enhancements
+
+Possible future improvements include:
+
+Mobile application
+Payment gateway integration
+Email order notifications
+SMS notifications
+Advanced analytics dashboard
+Barcode scanning
+PDF invoice generation
+Product recommendations
+Admin analytics
+Password reset functionality
+Two-factor authentication
+REST API
+Android application
+Progressive Web App (PWA)
+Cloud image storage
+
+🎯 Project Objectives
+
+The main objectives of CartNexa are:
+
+To simplify inventory management.
+To maintain product information efficiently.
+To manage suppliers and purchases.
+To track sales and inventory levels.
+To provide an online product browsing system.
+To allow users to place orders.
+To provide wishlist functionality.
+To allow customers to review products.
+To provide sales and purchase reports.
+To provide separate admin and user interfaces.
+
+👨‍💻 Author
+Neeraj J
+
+MCA Graduate
+
+Python | Flask | MySQL | Web Development
+
+📄 License
+
+This project is developed for educational, academic, and portfolio purposes.
+
+⭐ Support
+
+If you find this project useful, consider giving the repository a ⭐ on GitHub.
+
